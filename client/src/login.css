@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhai|Roboto&display=swap');
+
+
+body{
+  margin:0;
+  height: 100vh;
+}
+
+section{
+  overflow: hidden;
+  height: 100%;
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+}
+
+.circle{
+  background: teal;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 6;
+}
+
+.circle1{
+  height: 50vh;
+  width: 50vh;
+  bottom: -20vh;
+  right: -30vh;
+}
+
+.circle2{
+  height: 30vh;
+  width: 30vh;
+  top: -10vh;
+  left: -15vh;
+}
+
+.login-box{
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  height:70vh;
+  width:100vh;
+  display: flex;
+  background: white;
+  border-radius: 10px;
+  animation: aaijay .5s ease-in;
+}
+
+.form-area,.image-area{
+  height: 100%;
+  width: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-area{
+  background: teal;
+  position: relative;
+
+}
+.image{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  mix-blend-mode: soft-light;
+  /* filter: grayscale(100%) blur(1);  */
+}
+
+.image-text{
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
+.logo{
+  text-transform: uppercase;
+  font-size: 4vh;
+  font-weight: bolder;
+  font-family: 'Baloo Bhai', cursive;
+
+}
+
+.description{
+  width: 90%;
+  text-align: center;
+}
+.form-area{
+ display: flex;
+ flex-direction: column;
+
+}
+
+.welcome-text{
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.infinity{
+  text-transform: uppercase;
+  font-size: 5vh;
+  color: teal;
+}
+
+.login-description{
+  margin: 10px 0;
+}
+
+.input-box{
+  display: flex;
+  align-items: center;
+  width: 70%;
+  border: 1PX solid rgba(0,0,0,0.3);
+  padding :5px 0;
+  margin: 5px 0;
+  border-radius: 50px;
+  justify-content: center;
+
+}
+
+.icon{
+  text-align: center;
+  width:30px;
+}
+
+input{
+  border: none;
+  flex: 1;
+}
+
+input:focus{
+  outline:none;
+}
+
+button{
+  background: teal;
+  border: none;
+  border-radius: 50px;
+  margin:5px;
+  color: white;
+  padding: 10px 0;
+  width: 70%;
+  --webkit-box-shadow: -7px 10px 71px -28px rgba(73,199,113,1);
+  -moz-box-shadow: -7px 10px 71px -28px rgba(73,199,113,1);
+  box-shadow: -7px 10px 71px -28px rgba(73,199,113,1);
+
+}
+.dont{
+  margin: 10px 0;
+}
+
+.green{
+  color: teal;
+}
+
+.or{
+  display: flex;
+  align-items: center;
+  margin:2px 0;
+}
+.or::before, .or::after{
+  height: 2px;
+  content: '';
+  width: 30px;
+  background-color: rgba(199, 10, 10, 0.3);
+  margin:0 3px;
+}
+
+.social-icons{
+  display: flex;
+  justify-content: space-around;
+  width: 70%
+}
+
+.social-icon{
+  height: 25px;
+  display: flex;
+  width: 25px;
+  justify-content: center;
+  align-items: center;
+  border:1px solid rgba(0,0,0,0.3);
+  border-radius: 50%;
+
+}
+
+.social-icon:nth-child(1){
+  color:blue ;
+}
+.social-icon:nth-child(2){
+  color: teal;
+}
+.social-icon:nth-child(3){
+  color:coral ;
+}
+
+@keyframes aaijay{
+  from{
+    opacity: 0;
+    /* transform: translateY(-100%); */
+    transform: scale(1,1);
+  }
+  to{
+    opacity: 1;
+    transform: scale(1,1);
+  }
+}
+
