@@ -2,61 +2,49 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import Image from "../ImageSliderImages/signuppageimage.jpg";
 import axios from "axios";
-// import FormValidationRegister from '../Validator/FormValidationRegister';
+import FormValidationRegister from '../Validator/FormValidationRegister';
 
 import Money from '../logo/cash.png'
 
 export default class signupasprovider extends Component {
-// state={
-//   longitude:"",
-//   latitude:""
-// }
+state={
+  longitude:"",
+  latitude:""
+}
 //   // longitude": "85.3123",
 //   // "latitude": "27.6744",
-//   componentDidMount = async () => {
-//     await axios
-//       .get("https://json.geoiplookup.io/")
-//       .then(response => this.setState({ longitude:response.data.longitude,latitude:response.data.latitude}),
-// )
-//       .catch(err => console.log(err));
+  componentDidMount = async () => {
+    await axios
+      .get("https://json.geoiplookup.io/")
+      .then(response => this.setState({ longitude:response.data.longitude,latitude:response.data.latitude}),
+)
+      .catch(err => console.log(err));
     
 
-//   };
+  };
 
-//   register = async e => {
-//     e.preventDefault();
-//     const data = {
-//       username: e.target.username.value,
-//       password: e.target.password.value,
-//       // confirmpassword: e.target.confirmpassword.value,
-//       email: e.target.email.value,
-//       mobile: e.target.mobile.value,
-//       address :e.target.address.value,
-//       longitude:this.state.longitude,
-//       latitude:this.state.latitude
-// };
-// console.log("data.latitude",data.latitude)
-// console.log("data.longitude",data.longitute)
+  register = async e => {
+    e.preventDefault();
+    const data = {
+      username: e.target.username.value,
+      password: e.target.password.value,
+      // confirmpassword: e.target.confirmpassword.value,
+      email: e.target.email.value,
+      mobile: e.target.mobile.value,
+      address :e.target.address.value,
+      longitude:this.state.longitude,
+      latitude:this.state.latitude
+};
+console.log("data.latitude",data.latitude)
+console.log("data.longitude",data.longitute)
 
-//     const { errors, isValid } = FormValidationRegister(data);
-//     if (isValid) {
-//       console.log("data.longitude isvalid",data.longitute)
-
-//      axios.post("http://localhost:5000/api/users/signupasprovider", data).then(res=>{
-//        console.log(res)
-//        if(res.data.success){
-//                this.props.history.replace("/confirmation");
-//        }
-//       }).catch(err=>console.log({err}));
-//      // console.log(resp.promise.promisevalue.data.success)
-//      //  if(resp.data.success){
-//      //   this.props.history.replace("/confirmation");
-//      //  }
-//      } else {
-//        console.log(errors);
-//      }
-//    };
-
+const { errors, isValid } = FormValidationRegister(data);
+if (isValid) {
+  axios.post("http://localhost:5000/api/users/signupasprovider", data);
+} else {
+  console.log(errors);
+}
+};
   render() {
     return (
       <div>
@@ -79,7 +67,7 @@ export default class signupasprovider extends Component {
             
             <div class="signup-form-area">
               
-                {/* <div class="have-an-account">
+                <div class="have-an-account">
                 <Link to="/login" class="hover">
                 {" "}ALREADY HAVE AN ACCOUNT
                 </Link></div>
@@ -123,7 +111,7 @@ export default class signupasprovider extends Component {
               </div>
               <button type="submit" >Signup</button>
               </form>
-               */}
+              
                
             </div>
           </div>

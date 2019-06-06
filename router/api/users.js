@@ -27,7 +27,7 @@ const transporter = nodemailer.createTransport({
 
 const mailOption = {
   from: "thisisdummypraful@gmail.com", //sender address
-  to: "manandhar.praful13@gmail.com", //list of recivers
+  to: "praful.manandhar@es.cloudfactory.com", //list of recivers
   subject: "Please confirm your Email account", //subject line
   html: "<p>If you are seeing this then there is error!</p>" //plain text body
 };
@@ -178,13 +178,15 @@ router.post("/signupasprovider", (req, res) => {
                 console.log(err);
               } else {
                 console.log({
-                  success: "This is sending email"
+                  success: "This is sending email",
+                  
                 });
+                console.log(token)
               }
             });
           }
         );
-        res.json({ success: true });
+        res.json({ success: "User Added" });
       } else {
         res.json(err);
       }
@@ -203,15 +205,15 @@ router.get("/dashboard",
     });
      
 
-    //@route GET api/users/confirmation/:token
+   //@route GET api/users/confirmation/:token
 //@desc  Insert user route
 //@access
 router.get("/confirmation/:token", (req, res) => {
   try {
     const { email } = jwt.verify(req.params.token, keys.secretOrKey);
-    console.log(email);
+    console.log("confirmation/token",email);
     let statement =
-      'UPDATE evcustomer SET ev_status = "active" WHERE email=?;';
+      'UPDATE homeowner SET ow_userstatus = "active" WHERE ow_email=?;';
     mysqlConnection.query(statement, email, (err, results) => {
       if (!err) res.json({ success: "Email is now verified" });
       else {
