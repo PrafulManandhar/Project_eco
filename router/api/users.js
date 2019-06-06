@@ -114,7 +114,7 @@ router.post("/signupasreciver", (req, res) => {
             expiresIn: tokenExpiration
           },
           (err, token) => {
-            mailOption.html = `Hello,${username}!<br>Please Click on the link to verify your email.<a style="color:red" href="http://localhost:5000/api/users/confirmation/${token}/">Click here to verify</a>`;
+            mailOption.html = `Hello,${username}!<br>Please Click on the link to verify your email.<a style="color:red" href="http://localhost:5000/api/users/confirmations/${token}/">Click here to verify</a>`;
             transporter.sendMail(mailOption, (err, info) => {
               if (err) {
                 console.log(err);
@@ -214,6 +214,27 @@ router.get("/confirmation/:token", (req, res) => {
     console.log("confirmation/token",email);
     let statement =
       'UPDATE homeowner SET ow_userstatus = "active" WHERE ow_email=?;';
+    mysqlConnection.query(statement, email, (err, results) => {
+      if (!err) res.json({ success: "Email is now verified" });
+      else {
+        res.json({ err });
+      }
+    });
+  } catch (e) {
+    res.json(e);
+  }
+});
+
+
+  //@route GET api/users/confirmation/:token
+//@desc  Insert user route
+//@access
+router.get("/confirmations/:token", (req, res) => {
+  try {
+    const { email } = jwt.verify(req.params.token, keys.secretOrKey);
+    console.log("confirmation/token",email);
+    let statement =
+      'UPDATE evcustomer SET ev_status = "active" WHERE ev_email=?;';
     mysqlConnection.query(statement, email, (err, results) => {
       if (!err) res.json({ success: "Email is now verified" });
       else {

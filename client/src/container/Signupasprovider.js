@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import Image from "../ImageSliderImages/signuppageimage.jpg";
 import axios from "axios";
 import FormValidationRegister from '../Validator/FormValidationRegister';
@@ -51,7 +51,9 @@ if (isValid) {
         <div class="signupprovider-image">
           <div class="overlay">
             <div class="signup-discription-area">
-              <div class="name">E-HUB</div>
+            <NavLink to="/">
+                <div class="name">E-HUB</div>
+              </NavLink>
               <div class="short-discription-area">
                 E-HUB needs partners
                 <br />
@@ -68,9 +70,9 @@ if (isValid) {
             <div class="signup-form-area">
               
                 <div class="have-an-account">
-                <Link to="/login" class="hover">
+                <NavLink to="/login" class="hover">
                 {" "}ALREADY HAVE AN ACCOUNT
-                </Link></div>
+                </NavLink></div>
               
               <div>Create a New Account</div>
               <form onSubmit={this.register}>
