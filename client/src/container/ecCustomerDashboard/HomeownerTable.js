@@ -17,13 +17,13 @@ const dataTableData = {
       sort: "asc"
     },
     {
-      label: "Email",
-      field: "email",
+      label: "Station Location",
+      field: "location",
       sort: "asc"
     },
     {
-      label: "Mobile",
-      field: "mobile",
+      label: "Service Availability",
+      field: "availability",
       sort: "asc"
     },
     {
@@ -62,8 +62,8 @@ export default class HomeownerTable extends Component {
       dataTableData.rows.push({
         sno: home.ow_id,
         name: home.ow_username,
-        email: home.ow_email,
-        mobile: home.ow_mobile,
+        location: home.ow_address,
+        availability: home.ow_availability,
         userStatus: home.login_status,
         action: (
           <button

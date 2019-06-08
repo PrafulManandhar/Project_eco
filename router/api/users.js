@@ -264,12 +264,47 @@ router.get("/confirmations/:token", (req, res) => {
 router.get('/homeowner',(req,res)=>{
   let statement = "Select * from homeowner;"
   mysqlConnection.query(statement,"inactive",(err,results)=>{
-    console.log(results)
+    // console.log(results)
     if(!err) res.json(results);
     
   })
 })
 
-router.get("/test",(res,req)=>res.json({hello:hi}));
+router.get('/homeowner/:id',(req,res)=>{
+  let statement="Select ow_id, ow_username,ow_address,ow_availability from homeowner where ow_id=?";
+  mysqlConnection.query(statement,req.params.id,(err,results)=>{
+    if(!err){
+      // const data={
+      //   ow_id:rows[0].ow_id,
+      //   ow_username:rows[0].ow_username,
+      //   ow_address:rows[0].ow_address,
+      //   ow_availability:rows[0].ow_availability
+      // }
+      res.json(results)
+    }
+  })
+})
+
+router.post('booking',(req,res)=>{
+  let {
+    ow_id,
+    ev_id,
+    estimatedtime,
+    datetotravel,
+    chargingduration
+  } = req.body;
+
+  let statement="INSERT into booking(ow_id,ev_id,estimate_time,travel_date,duration_hour) VALUES(?,?,?,?,?);"
+
+  mysqlConnection.query(statement,[ow_id,ev_id,estimatedtime,datetotravel,chargingduration],(err,results)=>{
+      if(!err){
+        res.json({success:true})
+      }else{
+        console.log(err)
+      }
+  })
+})
+
+router.get("/test",(req,res)=>res.json({hello:"hi"}));
 
 module.exports=router;
