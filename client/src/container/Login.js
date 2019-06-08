@@ -6,41 +6,44 @@ import Navbar from "./Navbar";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import Axios from "axios";
-// import LoginValidation from "../Validator/LoginValidation";
-// import { login } from "../Action/loginAction";
-// import { loginusersdata } from "../Action/loginUserDataAction";
+import LoginValidation from "../Validator/LoginValidation";
+import { login } from "../Action/loginAction";
+import { loginusersdata } from "../Action/loginUserDataAction";
 import jwt_decode from "jwt-decode";
-// import setAuthToken from "../setauth";
+import setAuthToken from "../Utility/setauth";
 
-export default class Login extends Component {
-  // login = async e => {
-  //   e.preventDefault();
-  //   const data = {
-  //     email: e.target.email.value,
-  //     password: e.target.password.value
-  //   };
-  //   const { errors, isValid } = LoginValidation(data);
-  //   if (isValid) {
-  //     const resp = await Axios.post(
-  //       "http://localhost:5000/api/users/login",
-  //       data
-  //     ).then(res => {
-  //       console.log(res.data);
-  //       localStorage.setItem("token", res.data.token);
-  //       // console.log(res.data.data)
-  //       setAuthToken(res.data.token);
-  //       const decode = jwt_decode(res.data.token);
-  //       this.props.loginusersdata(decode);
-  //       // console.log(res.data.success);
-  //       if (res.data.success) {
-  //         this.props.login();
-  //         this.props.history.replace("/logindashboard");
-  //       }
-  //     });
-  //   } else {
-  //     console.log("Invalid username password");
-  //   }
-  // };
+class Login extends Component {
+
+  login = async e => {
+    e.preventDefault();
+    console.log(e.target.email.value)
+    const data = {
+      email: e.target.email.value,
+      password: e.target.password.value
+    };
+    console.log(data)
+    const { errors, isValid } = LoginValidation(data);
+    if (isValid) {
+      const resp = await Axios.post(
+        "http://localhost:5000/api/users/login",
+        data
+      ).then(res => {
+        console.log(res.data);
+        localStorage.setItem("token", res.data.token);
+        // console.log(res.data.data)
+        setAuthToken(res.data.token);
+        const decode = jwt_decode(res.data.token);
+        this.props.loginusersdata(decode);
+        // console.log(res.data.success);
+        if (res.data.success) {
+          this.props.login();
+          this.props.history.replace("/evdashboardmain");
+        }
+      });
+    } else {
+      console.log("Invalid username password");
+    }
+  };
   render() {
     return (
       <div>
@@ -54,7 +57,7 @@ export default class Login extends Component {
               <div class="login-description">
                 Login. We Promote Eco Vechiles
               </div>
-              <form >
+              <form onSubmit={this.login} >
                 <input
                   type="text"
                   placeholder="Enter Email"
@@ -71,8 +74,7 @@ export default class Login extends Component {
 
                 <div class="button">
                   <button
-                    // variant="contained"
-                    style={{ color: "teal" }}
+                  
                     type="submit"
                   >
                     Login
@@ -108,16 +110,16 @@ export default class Login extends Component {
   }
 }
 
-// const mapActionToProps = dispatch => ({
-//   login: () => dispatch(login()),
-//   loginusersdata: payload => dispatch(loginusersdata(payload))
-// });
+const mapActionToProps = dispatch => ({
+  login: () => dispatch(login()),
+  loginusersdata: payload => dispatch(loginusersdata(payload))
+});
 
-// const mapStateToProps = state => ({
-//   loginData: state.login
-// });
+const mapStateToProps = state => ({
+  loginData: state.login
+});
 
-// export default connect(
-//   mapStateToProps,
-//   mapActionToProps
-// )(Login);
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(Login);

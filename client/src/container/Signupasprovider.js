@@ -5,6 +5,7 @@ import axios from "axios";
 import FormValidationRegister from '../Validator/FormValidationRegister';
 
 import Money from '../logo/cash.png'
+import Card from "./Card";
 
 export default class signupasprovider extends Component {
 state={
@@ -25,6 +26,7 @@ state={
 
   register = async e => {
     e.preventDefault();
+    console.log(e.target.username.value)
     const data = {
       username: e.target.username.value,
       password: e.target.password.value,
@@ -122,7 +124,7 @@ if (isValid) {
           </div>
         </div>
         <div className="cards">
-          <div className="card">
+          {/* <div className="card">
             <img src={Money} className="signup-image"/>
             <div className="short-discription-area">
               Make a good money
@@ -148,7 +150,8 @@ if (isValid) {
             <div className="discription-area">
             Got a house? Turn it into a money machine. The city is buzzing and ehub makes it easy for you to cash in on the action. Plus, you've already got everything you need to get started.
             </div>
-          </div>
+          </div> */}
+          <Card/>
         </div>
       </div>
     );

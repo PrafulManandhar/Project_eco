@@ -7,7 +7,7 @@ export function dataReducer(state=initialState,action){
     case "POSITION":
       return {...state,data:action.payload}
     case "LOGOUT":
-      return {...state,data:{}}
+      return {data:{}}
     default :
     return {...state}
   }

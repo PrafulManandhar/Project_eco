@@ -21,13 +21,13 @@ module.exports = passport => {
         (err, rows) => {
           if (!err) {
             let user={
-               email:rows[0].ev_email
-          //      image:row[0].ev_image,
-          //      username:row[0].ev_username,
-          //      mobile:row[0].ev_mobile,
-          //     registration_data:row[0].ev_registration_date,
-          //   status:row[0].ev_status,
-          // address:row[0].ev_address         
+               email:rows[0].ev_email,
+               image:rows[0].ev_image,
+               username:rows[0].ev_username,
+               mobile:rows[0].ev_mobile,
+              registration_data:rows[0].ev_registration_date,
+            status:rows[0].ev_status,
+          address:rows[0].ev_address         
            }
             return next(null,user);
           }else

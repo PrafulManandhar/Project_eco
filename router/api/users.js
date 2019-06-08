@@ -249,7 +249,7 @@ router.get("/confirmations/:token", (req, res) => {
     //@desc Return Location of homeowner
 
     router.get("/location",(req,res)=>{
-      let statement = "SELECT ow_longitude,ow_latitude FROM homeowner";
+      let statement = "SELECT ow_id,ow_longitude,ow_latitude FROM homeowner";
       mysqlConnection.query(statement,(err,result)=>{
         if(!err)
       res.json(result)  
@@ -258,6 +258,17 @@ router.get("/confirmations/:token", (req, res) => {
       }  
   })
     })
+//@route Get api/users/homeowner
+//@return the list of homeowner whos status is active
+
+router.get('/homeowner',(req,res)=>{
+  let statement = "Select * from homeowner;"
+  mysqlConnection.query(statement,"inactive",(err,results)=>{
+    console.log(results)
+    if(!err) res.json(results);
+    
+  })
+})
 
 router.get("/test",(res,req)=>res.json({hello:hi}));
 

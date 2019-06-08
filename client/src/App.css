@@ -303,7 +303,7 @@ img {
 .overlay {
   position: absolute;
   background-color: rgba(45, 102, 48, 0.4);
-  height: 70vh;
+  height: 65vh;
   width: 100%;
   margin-right: 15px;
   z-index: 9999;

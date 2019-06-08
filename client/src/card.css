@@ -1,0 +1,66 @@
+body{
+	background-color: #f4f4f4;
+	color: #555555;
+
+	font-family: "Bookman Old Style", serif;
+	font-size: 20px;
+	font-weight: normal;
+	/* Same as above */
+	font: normal 16px "Bookman Old Style", serif;
+	
+	line-height:1.6em;	
+}
+
+
+.block{
+	float:left;
+	width: 33.3%;
+	border:1px;
+	padding:10px;
+	box-sizing:border-box;
+	margin:auto;  
+	text-align: center;
+}
+
+.dot1{
+	margin-left: 20px;
+	margin-top: 30px;
+	height: 120px;	
+	width: 120px;
+	background-color: #333;
+	background-image: url('../src/ImageSliderImages/money.png');
+	border-radius: 50%;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.dot2{
+	margin-left: 20px;
+	margin-top: 30px;
+	height: 120px;	
+	width: 120px;
+	background-color: #333;
+	background-image: url('../src/ImageSliderImages/charge.png');
+	border-radius: 50%;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.dot3{
+	margin-left: 20px;
+	margin-top: 30px;
+	height: 120px;	
+	width: 120px;
+	background-color: #333;
+	background-image: url('../src/ImageSliderImages/EVcar.png');
+	border-radius: 50%;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+
+

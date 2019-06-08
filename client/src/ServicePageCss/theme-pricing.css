@@ -1,0 +1,55 @@
+
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,500|Catamaran:100,200,300,400,500,600,700,800,900');
+#pricing{
+    margin-top:80px;
+    margin-bottom:80px;
+}
+#pricing .lg-title {
+    font-size: 50px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    line-height: 60px;
+    color: rgb(33, 37, 41);
+}
+#pricing h2{
+    font-family: Catamaran,Helvetica,Arial,sans-serif;
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: .5rem;
+    color: #212529;
+    text-align:left;
+}
+
+
+
+/*----------------------
+ PRICING
+-----------------------*/
+
+.pricing-block{
+    text-align: center;
+    padding: 30px 40px;
+    border: 1px solid#ddd;
+}
+
+#pricing .pricing-block h2{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+.price{
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.price small{
+    font-size: 18px;
+}
+.pricing-block ul{
+    margin-bottom: 30px;
+}
+.pricing-block li{
+    padding: 6px 0px;
+    border-top: 1px solid#eee;
+}

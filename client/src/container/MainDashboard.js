@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import ImageSlider from './ImageSlider';
 import ServiceCard from './ServiceCard';
 import TeamInfo from "./TeamInfo";
+import Signupinmain from "./Signupinmain.1";
 // import CarCard from './container/CarCard';
 export default class MainDashboard extends Component {
   render() {
@@ -10,8 +11,8 @@ export default class MainDashboard extends Component {
       <div>
         <Navbar />
         <ImageSlider />
-        <div style={{marginTop:"20%"}}><TeamInfo/></div>
-        
+        {/* <div style={{marginTop:"20%"}}><TeamInfo/></div> */}
+        <Signupinmain/>
         <div style={{ marginTop: "60px" }}>
           <ServiceCard />
         </div>

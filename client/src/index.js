@@ -8,7 +8,14 @@ import {createStore,applyMiddleware,compose} from 'redux';
 import {Provider} from 'react-redux';
 import rootReducer from './combineReducer';
 import thunk from "redux-thunk";
-
+import '../src/bootstrap/css/sb-admin-2.min.css'
+import '../src/bootstrap/vendor/fontawesome-free/css/all.min.css'
+// import './Bootstrap/css/sb-admin-2.min.css'
+// import './Bootstrap/vendor/fontawesome-free/css/all.min.css';
+import '../src/card.css'
+import '../src/ServicePageCss/style.css'
+import '../src/ServicePageCss/theme-pricing.css'
+import '../src/ServicePageCss/theme.css'
 import './bootstrap/css/open-iconic-bootstrap.min.css';
 import  './bootstrap/css/animate.css'
 import './bootstrap/css/owl.carousel.min.css';
