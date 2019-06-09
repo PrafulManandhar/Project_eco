@@ -1,4 +1,6 @@
+
 module.exports={
-  secretOrKey:"secret",
+  secretOrkey:"secret",    
   EMAIL_SECRET:"emailSecretKey"
+
 }

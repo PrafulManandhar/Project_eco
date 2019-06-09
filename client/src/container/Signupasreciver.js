@@ -7,6 +7,9 @@ import FormValidationRegister from "../Validator/FormValidationRegister";
 import Money from "../logo/cash.png";
 
 export default class Signupasreciver extends Component {
+  state={
+    error:false
+  }
   register = async e => {
     e.preventDefault();
     const data = {
@@ -19,7 +22,13 @@ export default class Signupasreciver extends Component {
     };
     const { errors, isValid } = FormValidationRegister(data);
     if (isValid) {
-      axios.post("http://localhost:5000/api/users/signupasreciver", data);
+      axios.post("http://localhost:5000/api/users/signupasreciver", data).then(res=>{
+        if(res.data.success){
+          this.props.history.replace("/useradded")
+        }else{
+          this.setState({error:true})
+        }
+      });
     } else {
       console.log(errors);
     }
@@ -53,31 +62,15 @@ export default class Signupasreciver extends Component {
               </div>
 
               <div>Create a New Account</div>
-              <form onClick={this.register}>
-                <div>
-                  <input type="text" placeholder="UserName" name="username" />
-                </div>
-
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email : name@example.com"
-                  />
-                </div>
-                <div class="signup-input-area">
-                  <input type="number" name="mobile" placeholder="mobile" />
-                </div>
-                <div class="signup-input-area">
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                  />
-                </div>
-                <div class="signup-input-area">
-                  <input type="text" name="address" placeholder="Address" />
-                </div>
+              <form onSubmit={this.register}>
+                
+                <input type="text" class="form-control" name="username" placeholder="Username"/> 
+                <input type="email" class="form-control" name="email" placeholder="name@example.com"/>
+                 {!this.state.error?'':"you have already sign up"}
+                <input type="number" class="form-control" name="mobile" placeholder="Mobile"/>
+                <input type="text" class="form-control" name="address" placeholder="Address"/>
+                <input type="password" class="form-control" name="password" placeholder="Password"/>
+                
                 <div class="term">
                   By proceeding, I agree to Uber's Terms of Use and acknowledge
                   that I have read the Privacy Policy.

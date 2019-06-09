@@ -43,11 +43,13 @@ router.post("/login", (req, res) => {
   if (!isValid) {
     return res.status(400).json({ errors });
   }
-  let statement = "SELECT * FROM evcustomer WHERE ev_email=?";
+
+  let statement = "SELECT * FROM evcustomer WHERE ev_email=? && ev_status=?";
 
   let { email, password } = req.body;
-  mysqlConnection.query(statement, email, (err, rows) => {
+  mysqlConnection.query(statement, [email,"active"], (err, rows) => {
     if (!err && rows[0]) {
+
       if (bcrypt.compare(password, rows[0].ev_password)) {
         //"Authorized"
         //0 is Active 1 is Inactive
@@ -62,7 +64,7 @@ router.post("/login", (req, res) => {
             };
             jwt.sign(
               payload,
-              keys.secretOrKey,
+              keys.secretOrkey,
               {
                 expiresIn: tokenExpiration
               },
@@ -74,12 +76,10 @@ router.post("/login", (req, res) => {
             res.json({ error: "Failed to update user status" });
           }
         });
-      } else {
-        res.json({ error: "Unauthorized User" });
-      }
+      } 
     } else {
       //Not authorized"
-      res.status(400).json({ error: "Unauthorized" });
+      res.json({ success:false });
     }
   });
 });
@@ -110,29 +110,37 @@ router.post("/signupasreciver", (req, res) => {
         jwt.sign(
           payload,
           keys.secretOrkey,
-          {
-            expiresIn: tokenExpiration
-          },
-          (err, token) => {
-            mailOption.html = `Hello,${username}!<br>Please Click on the link to verify your email.<a style="color:red" href="http://localhost:5000/api/users/confirmations/${token}/">Click here to verify</a>`;
-            transporter.sendMail(mailOption, (err, info) => {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log({
-                  success: "This is sending email"
-                });
-              }
-            });
+         
+          (err,token) => {
+            if(!err){
+              console.log("token", token)
+              mailOption.to = `${email}`;
+              mailOption.html = `Hello,${username}!<br>Please Click on the link to verify your email.<a style="color:red" href="http://localhost:5000/api/users/evconfirmation/${token}/">Click here to verify</a>`;
+              transporter.sendMail(mailOption, (err, info) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log({
+                    success: "This is sending email",
+                    
+                  });
+                  console.log("token",token)
+                }
+              });
+            }else{
+              console.log("err",err)
+            }
+            
           }
         );
         res.json({ success: true });
       } else {
-        res.json(err);
+        res.json({success:false});
       }
     }
   );
 });
+
 
 
 router.post("/signupasprovider", (req, res) => {
@@ -162,33 +170,37 @@ router.post("/signupasprovider", (req, res) => {
     (err, results) => {
       if (!err) {
         const payload = {
-          email: email
+          email:email
         };
         jwt.sign(
           payload,
           keys.secretOrkey,
-          {
-            expiresIn: tokenExpiration
-          },
-          (err, token) => {
-            mailOption.to = `${email}`;
-            mailOption.html = `Hello,${username}!<br>Please Click on the link to verify your email.<a style="color:red" href="http://localhost:5000/api/users/confirmation/${token}/">Click here to verify</a>`;
-            transporter.sendMail(mailOption, (err, info) => {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log({
-                  success: "This is sending email",
-                  
-                });
-                console.log(token)
-              }
-            });
+         
+          (err,token) => {
+            if(!err){
+              console.log("token", token)
+              mailOption.to = `${email}`;
+              mailOption.html = `Hello,${username}!<br>Please Click on the link to verify your email.<a style="color:red" href="http://localhost:5000/api/users/confirmation/${token}/">Click here to verify</a>`;
+              transporter.sendMail(mailOption, (err, info) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log({
+                    success: "This is sending email",
+                    
+                  });
+                  console.log("token",token)
+                }
+              });
+            }else{
+              console.log("err",err)
+            }
+            
           }
         );
-        res.json({ success: "User Added" });
+        res.json({ success: true });
       } else {
-        res.json(err);
+        res.json({success:false});
       }
     }
   );
@@ -209,8 +221,9 @@ router.get("/dashboard",
 //@desc  Insert user route
 //@access
 router.get("/confirmation/:token", (req, res) => {
+  if(!req.params.token) return;
   try {
-    const { email } = jwt.verify(req.params.token, keys.secretOrKey);
+    const { email } = jwt.verify(req.params.token, keys.secretOrkey);
     console.log("confirmation/token",email);
     let statement =
       'UPDATE homeowner SET ow_userstatus = "active" WHERE ow_email=?;';
@@ -225,18 +238,35 @@ router.get("/confirmation/:token", (req, res) => {
   }
 });
 
+router.get("/ev confirmation/:token",(req,res)=>{
+  if(!req.params.token) return;
+  try {
+    const { email } = jwt.verify(req.params.token, keys.secretOrkey);
+    console.log("confirmation/token",email);
+    let statement =
+      'UPDATE evcustomer SET ev_userstatus = "active" WHERE ev_email=?;';
+    mysqlConnection.query(statement, email, (err, results) => {
+      if (!err) res.json({ success: "Email is now verified" });
+      else {
+        res.json({ err });
+      }
+    });
+  } catch (e) {
+    res.json(e);
+  }
+})
 
   //@route GET api/users/confirmation/:token
 //@desc  Insert user route
 //@access
-router.get("/confirmations/:token", (req, res) => {
+router.get("/confirmation/:token", (req, res) => {
   try {
-    const { email } = jwt.verify(req.params.token, keys.secretOrKey);
+    const { email } = jwt.verify(req.params.token, keys.secretOrkey);
     console.log("confirmation/token",email);
     let statement =
       'UPDATE evcustomer SET ev_status = "active" WHERE ev_email=?;';
     mysqlConnection.query(statement, email, (err, results) => {
-      if (!err) res.json({ success: "Email is now verified" });
+      if (!err) res.json({ success: "Email is now verified " });
       else {
         res.json({ err });
       }
@@ -285,10 +315,11 @@ router.get('/homeowner/:id',(req,res)=>{
   })
 })
 
-router.post('booking',(req,res)=>{
+router.post('/booking',(req,res)=>{
+  // res.json(req)
   let {
-    ow_id,
-    ev_id,
+    owid,
+    evid,
     estimatedtime,
     datetotravel,
     chargingduration
@@ -296,7 +327,7 @@ router.post('booking',(req,res)=>{
 
   let statement="INSERT into booking(ow_id,ev_id,estimate_time,travel_date,duration_hour) VALUES(?,?,?,?,?);"
 
-  mysqlConnection.query(statement,[ow_id,ev_id,estimatedtime,datetotravel,chargingduration],(err,results)=>{
+  mysqlConnection.query(statement,[owid,evid,estimatedtime,datetotravel,chargingduration],(err,results)=>{
       if(!err){
         res.json({success:true})
       }else{
@@ -304,6 +335,7 @@ router.post('booking',(req,res)=>{
       }
   })
 })
+
 
 router.get("/test",(req,res)=>res.json({hello:"hi"}));
 

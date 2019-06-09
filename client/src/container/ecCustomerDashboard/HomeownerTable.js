@@ -106,7 +106,7 @@ export default class HomeownerTable extends Component {
       display = (
         <Container>
           <Row>
-            <Col md="9" className="ml-2">
+            <Col md={{ span: 9, offset: 1 }}>
               <MDBDataTable
                 striped
                 hover

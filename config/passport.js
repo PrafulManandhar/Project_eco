@@ -6,7 +6,7 @@ const mysqlConnection = mysql.createConnection(databaseOptions);
 const keys = require("./keys");
 const options = {};
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-options.secretOrKey = keys.secretOrKey;
+options.secretOrKey = keys.secretOrkey;
 mysqlConnection.connect(err => {
   if (err) console.log(err);
 });
@@ -21,6 +21,7 @@ module.exports = passport => {
         (err, rows) => {
           if (!err) {
             let user={
+              id:rows[0].ev_id,
                email:rows[0].ev_email,
                image:rows[0].ev_image,
                username:rows[0].ev_username,

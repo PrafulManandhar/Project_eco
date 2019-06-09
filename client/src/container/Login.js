@@ -13,7 +13,9 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../Utility/setauth";
 
 class Login extends Component {
-
+  state={
+    error:false
+  }
   login = async e => {
     e.preventDefault();
     console.log(e.target.email.value)
@@ -24,24 +26,35 @@ class Login extends Component {
     console.log(data)
     const { errors, isValid } = LoginValidation(data);
     if (isValid) {
-      const resp = await Axios.post(
+      await Axios.post(
         "http://localhost:5000/api/users/login",
         data
       ).then(res => {
         console.log(res.data);
-        localStorage.setItem("token", res.data.token);
-        // console.log(res.data.data)
-        setAuthToken(res.data.token);
-        const decode = jwt_decode(res.data.token);
-        this.props.loginusersdata(decode);
-        // console.log(res.data.success);
-        if (res.data.success) {
+        console.log(res.data.success)
+        if(res.data.success){
+          localStorage.setItem("token", res.data.token);
+          // console.log(res.data.data)
+          setAuthToken(res.data.token);
+          const decode = jwt_decode(res.data.token);
+          this.props.loginusersdata(decode);
           this.props.login();
           this.props.history.replace("/evdashboardmain");
+        }else{
+          this.setState({error:true})
         }
-      });
+      }).catch(err=>console.log({err}));
     } else {
-      console.log("Invalid username password");
+      console.log("Invalid username password",errors);
+    }
+    if(localStorage.token){
+      this.props.login();
+      console.log(localStorage.token)
+      setAuthToken(localStorage.token);
+      const decode = jwt_decode(localStorage.token);
+      this.props.loginusersdata(decode);
+      this.props.history.replace("/evdashboardmain");
+
     }
   };
   render() {
@@ -80,6 +93,7 @@ class Login extends Component {
                     Login
                   </button>
                 </div>
+                <div style={{color:"red", fontSize:"10px"}}>{!this.state.error?'':'your username password is incorrect'}</div>
               </form>
               <div class="dont">
                 Don't have an accout?

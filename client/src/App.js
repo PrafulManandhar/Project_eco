@@ -9,6 +9,8 @@ import Signupasprovider from '../src/container/Signupasprovider';
 import Signupasreciver from '../src/container/Signupasreciver';
 import evCustomerMainDashboard from './container/ecCustomerDashboard/evCustomerMainDashboard';
 import Service from './container/Service';
+import SuccessMsg from './container/SuccessMsg';
+import MyProfile from './container/ecCustomerDashboard/MyProfile';
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
         <Route path="/signupasprovider" component={Signupasprovider}/>
         <Route path="/evdashboardmain" component={evCustomerMainDashboard} exact/>
         <Route path="/service" component={Service} exact/>
+        <Route path="/useradded" component={SuccessMsg} exact/>
+        <Route path="/evProfile" component={MyProfile} exact/>
+
         {/* <Route path="/contact" component={evCustomerMainDashboard} exact/> */}
 
       </Switch>

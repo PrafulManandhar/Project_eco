@@ -4,13 +4,16 @@ import Img from "../../bootstrap/images/prafulimage.jpg";
 import { connect } from "react-redux";
 import { logout } from "../../Action/loginAction";
 import { logoutusersdata } from "../../Action/loginUserDataAction";
+import {delwhilelogout} from '../../Action/dataAction';
 import { withRouter } from "react-router-dom";
+import {NavLink} from 'react-router-dom'
 
 class Navbar extends Component {
   logout = () => {
     localStorage.clear();
     this.props.logout();
     this.props.auth();
+    this.props.locationDataDel();
     this.props.history.replace("/");
   };
   render() {
@@ -265,10 +268,10 @@ class Navbar extends Component {
                 class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown"
               >
-                <a class="dropdown-item" href="#">
+                <NavLink class="dropdown-item" to="/evprofile">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                   Profile
-                </a>
+                </NavLink>
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
                   Settings
@@ -293,7 +296,8 @@ class Navbar extends Component {
 
 const mapActionToProps = dispatch => ({
   logout: () => dispatch(logout()),
-  auth: () => dispatch(logoutusersdata())
+  auth: () => dispatch(logoutusersdata()),
+  locationDataDel:()=>dispatch(delwhilelogout())
 });
 
 const mapStateToProps = state => ({

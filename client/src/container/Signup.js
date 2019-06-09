@@ -16,7 +16,7 @@ export default class Signup extends Component {
               <img src={Home} style={{ height: "10vh", width: "10vh" }} />
             </div>
             <div className="signup-main">
-            <div > <NavLink to='/signupasprovider' className="signup-name">Sign up to give</NavLink></div>
+            <div > <NavLink to='/signupasprovider' className="signup-name">Sign up as HomeOwner</NavLink></div>
               <div className="arrow">
                 <img src={Arrow} style={{ height: "5vh", width: "8vh" }} />
               </div>
@@ -28,7 +28,7 @@ export default class Signup extends Component {
               <img src={Car} style={{ height: "10vh", width: "10vh" }} />
             </div>
             <div className="signup-main">
-            <div > <NavLink to='/signupasreciver' className="signup-name">Sign up to take</NavLink></div>
+            <div > <NavLink to='/signupasreciver' className="signup-name">Sign up as EvCustomer</NavLink></div>
               <div className="arrow">
                 <img src={Arrow} style={{ height: "5vh", width: "8vh" }} />
               </div>
