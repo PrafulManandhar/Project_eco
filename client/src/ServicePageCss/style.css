@@ -30,18 +30,9 @@ html, body{
 	top: 50%;
 	z-index: 1;
 	transform: translate(-50%, -50%);
-	text-align: center;
 }
 .top-banner--text p, .top-banner--text h3{
 	color:#fff;
-	
-}
-.top-banner--text h3{
-
-	font-family: 'Roboto', sans-serif;
-}
-.top-banner--text p{
-	font-family: 'Raleway', sans-serif;
 }
 .service-steps{
 		background:#4aa2a2;
@@ -144,7 +135,7 @@ position: relative;
 	z-index: 10;
 
 }
-.profile-holder .img-holder{
+.profile-img-holder{
 width:200px;
 height: 200px;
 border-radius: 50%;
@@ -170,28 +161,170 @@ display: inline-block;
 	border:0px;
 	text-align: center;
 }
-.profile-cnt .book-btn{
-border-radius: 50px;
-    border: 1px solid #214cec;
+.book-btn{
+	border: 1px solid #214cec;
     background: #214cec;
-    text-transform: uppercase;
     width: 40%;
     display: block;
     text-align: center;
-    height: 54px;
-    line-height: 54px;
+    height: 35px;
+    line-height: 35px;
     color: #fff;
     font-size: 17px;
+    border-radius: 50px;
+    height: 54px;
+    line-height: 54px;
+    text-transform: uppercase;
 }
-	
-	
+
+/* profile owner css */
+@font-face {
+	font-family: 'icomoon';
+	src : url('../ServicePageCss/icomoon.eot?6186j0');
+  src:  url('../ServicePageCss/icomoon.eot?6l86j0#iefix') format('embedded-opentype'),
+    url('../ServicePageCss/icomoon.ttf?6l86j0') format('truetype'),
+    url('../ServicePageCss/icomoon.woff?6l86j0') format('woff'),
+    url('../ServicePageCss/icomoon.svg?6l86j0#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mobile:before {
+  content: "\e958";
+}
+
+.blue-btn{
+    border: 1px solid #214cec;
+    background: #214cec;
+    width:auto;
+    padding: 0px 20px;
+    display: inline-block;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    color: #fff;
+    font-size: 17px;
+    border-radius: 2px;
+}
+.blue-btn:hover{
+	background: #2b3e88;
+	color: #fff;
+}
+.blue-btn--rounded{
+    border-radius: 50px;
+    height: 54px;
+    line-height: 54px;
+    text-transform: uppercase;
+}
+
+
+.ower-profiler-page{
+	background: #ececec;
+}
+.ower-profiler-holder{
+ padding: 40px 0;
+}
+.ower-profile-section{
+	background: #fff;
+	padding:40px 0;
+}
+.ower-profile--left{
+ text-align: center;
+}
+.ower-profile--info{
+	padding: 20px 0;
+}
+.ower-profile--info h3{
+	font-size: 16px;
+	color: #999;
+	margin: 0px;
+	padding: 0px; 
+}
+.ower-profile--info a.email,.ower-profile--info span.phone{
+	font-size: 12px;
+	text-decoration: none;
+	color: #999;
+	display: block;
+}
+.ower-profile--right{
+		padding:0 0 0 40px;
+	border-left: 1px solid #ededed;
+}
+.basicInfo-item{
+	width: 90%;
+	border-bottom:1px solid #ededed;
+	margin: 0 0 30px 0;
+	padding:0 0 15px 0;
+}
+.basicInfo-item:last-child{
+	border:0px;
+	margin-bottom: 0px
+}
+.basicInfo-item h4{
+font-size: 18px;
+color: #666;
+margin: 0 0 20px 0;
+padding: 0px;
+}
+.basicInfo-item ul{
+	list-style: none;
+	padding: 0px;
+	margin:0px;
+}
+.basicInfo-item ul li{
+    list-style: none;
+	padding: 1px 0px;
+	margin:0px;
+	display: inline-block;
+	width: 100%;
+}
+.basicInfo-item ul li p{
+	font-size: 13px;
+}
+.basicInfo-item ul li span{
+	float: left;
+	font-size: 13px;
+	color: #333;
+	display: block;
+}
+.basicInfo-item ul li span.bi-label{
+	font-weight: bold;
+	width:25%;
+}
+.basicInfo-item ul li span.bi-value{
+	width:75%;
+}
+.ower-profile--right .blue-btn{
+	font-size: 12px;
+}
+
 img{
 	height: 200px;
 	width: 200px;
 	object-fit: cover;
-	object-position: center;
-
+	object-position: center; 
 }
+
+
+
+	
+	
+
  
 	
 	

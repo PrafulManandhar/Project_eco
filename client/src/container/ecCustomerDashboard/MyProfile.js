@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import Navbar from '../Navbar';
+import Navbar from './Navbar'
+import Img from '../../ImageSliderImages/user.png'
+import {connect} from 'react-redux';
 
-export default class MyProfile extends Component {
+class MyProfile extends Component {
   render() {
+    console.log(this.props.MyProfile.userInfo)
     return (
       <div>
         <Navbar/>
@@ -14,11 +17,12 @@ export default class MyProfile extends Component {
 <div class="row">
   <div class="col-sm-3 col-3">
     <div class=" ower-profile--left">
-      <div class="profile-img-holder"><img src="img/user.png" alt=""/></div>
+      <div class="profile-img-holder"><img src={Img} alt=""/></div>
       <div class="ower-profile--info">
-        <h3>Sanu Maya</h3>
-        <a href="#" class="email">sanumaya15@gmail.com</a>
-        <span class="phone">1231312312</span>
+            
+        <h3>{this.props.MyProfile.userInfo.username}</h3>
+        <a href="#" class="email">{this.props.MyProfile.userInfo.email}</a>
+        <span class="phone">{this.props.MyProfile.userInfo.mobile}</span>
       </div>
     </div>
   </div>
@@ -36,12 +40,11 @@ export default class MyProfile extends Component {
         <div class="basicInfo-item">
           <h4>Basic Information</h4>
           <ul>
-            <li><span class="bi-label">Address:</span><span class="bi-value">Kalimati</span></li>
+            <li><span class="bi-label">Address:</span><span class="bi-value">{this.props.MyProfile.userInfo.address}</span></li>
             <li><span class="bi-label">Zone:</span><span class="bi-value">Kathmandu</span></li>
             <li><span class="bi-label">District:</span><span class="bi-value">kathmandu</span></li>
-            <li><span class="bi-label">Pan number:</span><span class="bi-value">123123123123</span></li>
-            <li><span class="bi-label">Register date:</span><span class="bi-value">2075/2/2</span></li>
-            <li><span class="bi-label">Open/close time:</span><span class="bi-value">5am - 10pm</span></li>
+            <li><span class="bi-label">Mobile no:</span><span class="bi-value">{this.props.MyProfile.userInfo.mobile}</span></li>
+            <li><span class="bi-label">Register date:</span><span class="bi-value">{this.props.MyProfile.userInfo.registration_data}</span></li>
           </ul>
         </div>
         <a href="#" class="blue-btn">Edit profile</a>
@@ -58,3 +61,10 @@ export default class MyProfile extends Component {
     )
   }
 }
+
+
+const mapStateToProps=state=>({
+MyProfile:state.userdata
+})
+
+export default connect(mapStateToProps)(MyProfile)
