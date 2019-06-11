@@ -336,6 +336,56 @@ router.post('/booking',(req,res)=>{
   })
 })
 
+router.get("/evbooking/:id",(req,res)=>{
+  console.log("hello")
+  let data=[]
+  // let statement ="SELECT booking_status,ow_username,ow_mobile,ow_email,ow_address,ow_registration_date,duration_hour,ow_image,ow_availability,travel_date FROM booking JOIN homeowner ON booking.`ow_id`= homeowner.`ow_id` WHERE ev_id=?"
+
+  let statement ="select * FROM booking JOIN homeowner ON booking.`ow_id`= homeowner.`ow_id` WHERE ev_id=? "
+  mysqlConnection.query(statement,req.params.id,(err,rows)=>{
+    console.log("results",rows)
+   
+    res.json({rows})
+  })
+
+})
+
+    // if(!err){
+    //   let i=0;
+    //   for (i=0;i<rows.length;i++){
+    //     console.log("inside for loop")
+    //     console.log("rows",rows[i])
+      
+    //     let statement2 ="select * from booking where bo_id=?"
+    //     mysqlConnection.query(statement2,rows[i].bo_id,(err,results)=>{
+    //       // console.log("results",results)
+    //       for(let j=0;j<results.length;j++){
+    //         console.log("results",results[j].ow_id)
+    //         console.log("rows",rows[j])
+    //       }
+    //     //   let statement3 ="select * from homeowner where ow_id=?"
+    //     //   mysqlConnection.query(statement3,results[i].ow_id,(err,secondresult)=>{
+    //     //     if(!err){
+    //     //       console.log("secondResult",secondresult[1][i])
+    //     //     }
+    //     //   })
+    //     //   // console.log("result",results[1][i])
+    //     //   // data.push({
+    //     //   //   bookingdetail:rows[i].travel_date
+    //     //   // })
+
+        
+          
+    //     })
+        
+      
+      
+//     }else{
+//       console.log("evbooking error",err)
+//     }
+//   })
+// res.json({hi:"helo"})})
+
 
 router.get("/test",(req,res)=>res.json({hello:"hi"}));
 
