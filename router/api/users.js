@@ -27,7 +27,7 @@ const transporter = nodemailer.createTransport({
 
 const mailOption = {
   from: "thisisdummypraful@gmail.com", //sender address
-  to: "praful.manandhar@es.cloudfactory.com", //list of recivers
+  to: "manandhar.praful13@gmail.com", //list of recivers
   subject: "Please confirm your Email account", //subject line
   html: "<p>If you are seeing this then there is error!</p>" //plain text body
 };
@@ -114,7 +114,7 @@ router.post("/signupasreciver", (req, res) => {
           (err,token) => {
             if(!err){
               console.log("token", token)
-              mailOption.to = `${email}`;
+              // mailOption.to = `${email}`;
               mailOption.html = `Hello,${username}!<br>Please Click on the link to verify your email.<a style="color:red" href="http://localhost:5000/api/users/evconfirmation/${token}/">Click here to verify</a>`;
               transporter.sendMail(mailOption, (err, info) => {
                 if (err) {
@@ -179,7 +179,7 @@ router.post("/signupasprovider", (req, res) => {
           (err,token) => {
             if(!err){
               console.log("token", token)
-              mailOption.to = `${email}`;
+              // mailOption.to = `${email}`;
               mailOption.html = `Hello,${username}!<br>Please Click on the link to verify your email.<a style="color:red" href="http://localhost:5000/api/users/confirmation/${token}/">Click here to verify</a>`;
               transporter.sendMail(mailOption, (err, info) => {
                 if (err) {
