@@ -35,7 +35,6 @@ class Booking extends Component {
   };
 
   book = () => {
-    this.setState({ booking: true });
 
     const bookingdetail = {
       owid: this.state.homeownerId,
@@ -54,7 +53,6 @@ class Booking extends Component {
         }
       })
       .catch(err => console.log(err));
-    this.props.history.replace("/evdashboardmain");
     }
     
   };
@@ -120,14 +118,14 @@ class Booking extends Component {
                     </span>
                   </li>
                   <li>
-                    <button onSubmit={this.book} class="book-btn">
+                    <button onClick={this.book} class="book-btn">
                       Book
                     </button>
                   </li>
                   <li>
                     {this.state.booking
                       ? "Your Booking has been submited"
-                      : ""}
+                      : "fdsfsd"}
                   </li>
                 </ul>
               </div>

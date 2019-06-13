@@ -317,6 +317,7 @@ router.get('/homeowner/:id',(req,res)=>{
 
 router.post('/booking',(req,res)=>{
   // res.json(req)
+  console.log("api/user/booking")
   let {
     owid,
     evid,
@@ -331,7 +332,7 @@ router.post('/booking',(req,res)=>{
       if(!err){
         res.json({success:true})
       }else{
-        console.log(err)
+        console.log("err from api/user/booking",err)
       }
   })
 })
