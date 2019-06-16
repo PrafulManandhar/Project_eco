@@ -419,7 +419,7 @@ router.get("/evbooking/:id",(req,res)=>{
 router.get("/homebooking/:id",(req,res)=>{
   console.log("hello")
 
-  let statement ="select * FROM booking JOIN homeowner ON booking.`ev_id`= evcustomer.`ev_id` WHERE ow_id=? "
+  let statement ="SELECT * FROM booking JOIN homeowner ON `booking`.`ow_id`=homeowner.`ow_id` WHERE homeowner.`ow_id`=?;"
   mysqlConnection.query(statement,req.params.id,(err,rows)=>{
     console.log("results",rows)
    
