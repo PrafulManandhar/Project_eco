@@ -404,7 +404,7 @@ router.post('/booking',(req,res)=>{
 })
 
 router.get("/evbooking/:id",(req,res)=>{
-  console.log("hello")
+  console.log("hello its from evbooking")
 
   let statement ="select * FROM booking JOIN homeowner ON booking.`ow_id`= homeowner.`ow_id` WHERE ev_id=? "
   mysqlConnection.query(statement,req.params.id,(err,rows)=>{
@@ -417,9 +417,9 @@ router.get("/evbooking/:id",(req,res)=>{
 
 
 router.get("/homebooking/:id",(req,res)=>{
-  console.log("hello")
+  console.log("hello this is home booking ")
 
-  let statement ="SELECT * FROM booking JOIN homeowner ON `booking`.`ow_id`=homeowner.`ow_id` WHERE homeowner.`ow_id`=?;"
+  let statement ="SELECT * FROM booking JOIN evcustomer ON `booking`.`ev_id`=evcustomer.`ev_id` WHERE booking.`ow_id`=?;"
   mysqlConnection.query(statement,req.params.id,(err,rows)=>{
     console.log("results",rows)
    
