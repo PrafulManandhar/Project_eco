@@ -16,6 +16,7 @@ class Navbar extends Component {
   };
   render() {
     // console.log(this.props.Userdata.data.user)
+    console.log(this.props.bookingdata)
     return (
       <div>
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -78,7 +79,7 @@ class Navbar extends Component {
               >
                 <i class="fas fa-bell fa-fw" />
                 {/* <!-- Counter - Alerts --> */}
-                <span class="badge badge-danger badge-counter">0</span>
+                <span class="badge badge-danger badge-counter"></span>
               </a>
               {/* <!-- Dropdown - Alerts --> */}
               <div
