@@ -23,7 +23,7 @@ class HomeOwnerDashboard extends Component {
       .catch(err => console.error(err));
 
       axios.get(`http://localhost:5000/api/users/homeownernotify/${this.props.UserInfo.userInfo.id}`).then(res=>{this.props.loginbookingdata(res.data)
-    console.log(res.data)}).catch(err=>console.error(err))
+    console.log(this.props.bookingdata)}).catch(err=>console.error(err))
 
     console.log("this.props.bookingdata",this.props.bookingdata)
 

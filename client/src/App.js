@@ -14,6 +14,7 @@ import MyProfile from './container/ecCustomerDashboard/MyProfile';
 import BookingCards from './container/ecCustomerDashboard/BookingCards';
 import HomeOwnerDashboard from './container/homeOwner/HomeOwnerDashboard';
 import HomeLogin from './container/HomeLogin';
+import HomeBookingCard from './container/homeOwner/HomeBookingCard';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/mybooking" component={BookingCards} exact/>
         <Route path="/homedashboard" component={HomeOwnerDashboard} exact/>
         <Route path="/homelogin" component={HomeLogin} exact/>
+        <Route path="/history" component={HomeBookingCard} exact/>
 
 
 

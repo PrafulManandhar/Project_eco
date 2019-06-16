@@ -7,16 +7,20 @@ import {loginbookingdata,logoutbookingdata} from '../../Action/bookingAction'
 import { loginusersdata,logoutusersdata} from "../../Action/loginUserDataAction";
 import { withRouter } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import Notify from "../Notify";
 
 class Navbar extends Component {
   logout = () => {
     localStorage.clear();
     this.props.logout();
+    this.props.logoutusersdata();
     this.props.history.replace("/");
   };
   render() {
+    console.log(this.props.bookingdata.bookingInfo[0])
+    console.log(Object.keys(this.props.bookingdata.bookingInfo).length)
     // console.log(this.props.Userdata.data.user)
-    console.log(this.props.bookingdata)
+    // console.log("inside the homeowner page and its is this.props.booking data",this.props.bookingdata)
     return (
       <div>
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -79,7 +83,7 @@ class Navbar extends Component {
               >
                 <i class="fas fa-bell fa-fw" />
                 {/* <!-- Counter - Alerts --> */}
-                <span class="badge badge-danger badge-counter"></span>
+                <span class="badge badge-danger badge-counter">{Object.keys(this.props.bookingdata.bookingInfo).length}</span>
               </a>
               {/* <!-- Dropdown - Alerts --> */}
               <div
@@ -87,19 +91,10 @@ class Navbar extends Component {
                 aria-labelledby="alertsDropdown"
               >
                 <h6 class="dropdown-header">Alerts Center</h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-file-alt text-white" />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">
-                      A new monthly report is ready to download!
-                    </span>
-                  </div>
-                </a>
+                {/* {this.props.bookingdata.bookingInfo.rows.map(item=>{
+                    <Notify item={item}/>
+                })} */}
+               
               </div>
             </li>
 
@@ -116,7 +111,7 @@ class Navbar extends Component {
               >
                 <i class="fas fa-envelope fa-fw" />
                 {/* <!-- Counter - Messages --> */}
-                <span class="badge badge-danger badge-counter">7</span>
+                <span class="badge badge-danger badge-counter">{this.props.bookingdata.bookingInfo.length}</span>
               </a>
               {/* <!-- Dropdown - Messages --> */}
               <div
@@ -216,7 +211,6 @@ class Navbar extends Component {
                 aria-expanded="false"
               >
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                  {/* {console.log("username",this.props.UserInfo.userInfo.username)} */}
                   {this.props.UserInfo.userInfo.username}
                 </span>
                 <img class="img-profile rounded-circle"  />
@@ -263,6 +257,8 @@ const mapStateToProps = state => ({
   UserInfo: state.userdata,
   bookingdata:state.bookingdata
 });
+
+
 
 export default connect(
   mapStateToProps,

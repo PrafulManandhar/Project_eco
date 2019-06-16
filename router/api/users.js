@@ -44,10 +44,10 @@ router.post("/login", (req, res) => {
     return res.status(400).json({ errors });
   }
 
-  let statement = "SELECT * FROM evcustomer WHERE ev_email=? && ev_status=?";
+  let statement = "SELECT * FROM evcustomer WHERE ev_email=? ";
 
   let { email, password } = req.body;
-  mysqlConnection.query(statement, [email,"active"], (err, rows) => {
+  mysqlConnection.query(statement, [email], (err, rows) => {
     if (!err && rows[0]) {
 
       if (bcrypt.compare(password, rows[0].ev_password)) {
@@ -59,7 +59,8 @@ router.post("/login", (req, res) => {
         mysqlConnection.query(statement2, ["online", email], (err, results) => {
           if (!err) {
             const payload = {
-              email: rows[0].ev_email
+              email: rows[0].ev_email,
+              role:rows[0].Role
               // id:row[0].ev_id
             };
             jwt.sign(
@@ -115,7 +116,8 @@ router.post("/homelogin", (req, res) => {
         mysqlConnection.query(statement2, ["online", email], (err, results) => {
           if (!err) {
             const payload = {
-              email: rows[0].ow_email
+              email: rows[0].ow_email,
+              role:rows[0].Role
               // id:row[0].ev_id
             };
             jwt.sign(
@@ -403,10 +405,21 @@ router.post('/booking',(req,res)=>{
 
 router.get("/evbooking/:id",(req,res)=>{
   console.log("hello")
-  let data=[]
-  // let statement ="SELECT booking_status,ow_username,ow_mobile,ow_email,ow_address,ow_registration_date,duration_hour,ow_image,ow_availability,travel_date FROM booking JOIN homeowner ON booking.`ow_id`= homeowner.`ow_id` WHERE ev_id=?"
 
   let statement ="select * FROM booking JOIN homeowner ON booking.`ow_id`= homeowner.`ow_id` WHERE ev_id=? "
+  mysqlConnection.query(statement,req.params.id,(err,rows)=>{
+    console.log("results",rows)
+   
+    res.json({rows})
+  })
+
+})
+
+
+router.get("/homebooking/:id",(req,res)=>{
+  console.log("hello")
+
+  let statement ="select * FROM booking JOIN homeowner ON booking.`ev_id`= evcustomer.`ev_id` WHERE ow_id=? "
   mysqlConnection.query(statement,req.params.id,(err,rows)=>{
     console.log("results",rows)
    
