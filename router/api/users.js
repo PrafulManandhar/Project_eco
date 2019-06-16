@@ -85,6 +85,10 @@ router.post("/login", (req, res) => {
 });
 
 
+
+//@route POST api/users/homelogin
+//@desc  Insert user route
+//@access
 router.post("/homelogin", (req, res) => {
   console.log("This is inside the post api/user/homelogin");
   // const { errors, isValid } = validateLogin(req.body);
@@ -94,18 +98,20 @@ router.post("/homelogin", (req, res) => {
     return res.status(400).json({ errors });
   }
 
-  let statement = "SELECT * FROM homeowner WHERE ow_email=? && ow_userstatus=?";
+  let statement = "SELECT * FROM homeowner WHERE ow_email=? && ow_userstatus=?;";
 
   let { email, password } = req.body;
+  console.log("email n  ",email)
   mysqlConnection.query(statement, [email,"active"], (err, rows) => {
+    console.log("rows inside homelogin",rows)
     if (!err && rows[0]) {
 
-      if (bcrypt.compare(password, rows[0].ev_password)) {
+      if (bcrypt.compare(password, rows[0].ow_password)) {
         //"Authorized"
         //0 is Active 1 is Inactive
 
         let statement2 =
-          "UPDATE homeowner SET login_status=? WHERE ow_email=? ;";
+          "UPDATE homeowner SET ow_userstatus=? WHERE ow_email=? ;";
         mysqlConnection.query(statement2, ["online", email], (err, results) => {
           if (!err) {
             const payload = {
@@ -129,7 +135,7 @@ router.post("/homelogin", (req, res) => {
       } 
     } else {
       //Not authorized"
-      res.json({ success:false });
+      res.json({ successssss:false });
     }
   });
 });
@@ -265,13 +271,16 @@ router.get("/dashboard",
     (req, res) => {
       res.json(req.user)
     });
+  
+    //@route GET api/users/current
+//@desc  Return current user
+//@access Private
+router.get("/homeownerdashboard",
+passport.authenticate("jwt", { session: false }),
+(req, res) => {
+  res.json(req.user)
+});
      
-    router.get("/homeownerdashboard",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
-      res.json(req.user)
-    });
-
     router.get("/homeownerdashboard",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
@@ -299,7 +308,7 @@ router.get("/confirmation/:token", (req, res) => {
   }
 });
 
-router.get("/ev confirmation/:token",(req,res)=>{
+router.get("/evconfirmation/:token",(req,res)=>{
   if(!req.params.token) return;
   try {
     const { email } = jwt.verify(req.params.token, keys.secretOrkey);
@@ -406,6 +415,21 @@ router.get("/evbooking/:id",(req,res)=>{
   mysqlConnection.query(statement,req.params.id,(err,rows)=>{
     console.log("results",rows)
    
+    res.json({rows})
+  })
+
+})
+
+
+router.get("/homeownernotify/:id",(req,res)=>{
+  console.log("hello this is homeownwernotift")
+ 
+
+  let statement ="SELECT ev_username,travel_date FROM `booking` JOIN `evcustomer` ON `booking`.`ev_id` = `evcustomer`.`ev_id` WHERE `ow_id` = ? AND `booking_status` = ?;";
+  
+  mysqlConnection.query(statement,[req.params.id,"nothing"],(err,rows)=>{
+    console.log("results",rows)
+   if(!err)
     res.json({rows})
   })
 

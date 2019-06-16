@@ -20,6 +20,7 @@ class Booking extends Component {
     };
   }
   componentDidMount = async () => {
+    console.log(this.state.homeownerId)
     await Axios.get(
       `http://localhost:5000/api/users/homeowner/${this.state.homeownerId}`
     )
@@ -35,7 +36,6 @@ class Booking extends Component {
   };
 
   book = () => {
-
     const bookingdetail = {
       owid: this.state.homeownerId,
       evid: this.props.evid.userInfo.id,

@@ -12,8 +12,8 @@ import Service from './container/Service';
 import SuccessMsg from './container/SuccessMsg';
 import MyProfile from './container/ecCustomerDashboard/MyProfile';
 import BookingCards from './container/ecCustomerDashboard/BookingCards';
-import HomeLogin from './container/HomeLogin'
 import HomeOwnerDashboard from './container/homeOwner/HomeOwnerDashboard';
+import HomeLogin from './container/HomeLogin';
 
 function App() {
   return (
@@ -31,8 +31,12 @@ function App() {
         <Route path="/useradded" component={SuccessMsg} exact/>
         <Route path="/evProfile" component={MyProfile} exact/>
         <Route path="/mybooking" component={BookingCards} exact/>
+        <Route path="/homedashboard" component={HomeOwnerDashboard} exact/>
         <Route path="/homelogin" component={HomeLogin} exact/>
-        <Route path ="/homedashboard" component={HomeOwnerDashboard}/>
+
+
+
+
         {/* <Route path="/contact" component={evCustomerMainDashboard} exact/> */}
 
       </Switch>
