@@ -98,7 +98,7 @@ router.post("/homelogin", (req, res) => {
     return res.status(400).json({ errors });
   }
 
-  let statement = "SELECT * FROM homeowner WHERE ow_email=? && ow_userstatus=?;";
+  let statement = "SELECT * FROM homeowner WHERE ow_email=? && ow_userstatus=?";
 
   let { email, password } = req.body;
   console.log("email n  ",email)
@@ -111,7 +111,7 @@ router.post("/homelogin", (req, res) => {
         //0 is Active 1 is Inactive
 
         let statement2 =
-          "UPDATE homeowner SET ow_userstatus=? WHERE ow_email=? ;";
+          "UPDATE homeowner SET login_status=? WHERE ow_email=? ;";
         mysqlConnection.query(statement2, ["online", email], (err, results) => {
           if (!err) {
             const payload = {
@@ -281,11 +281,6 @@ passport.authenticate("jwt", { session: false }),
   res.json(req.user)
 });
      
-    router.get("/homeownerdashboard",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
-      res.json(req.user)
-    });
 
    //@route GET api/users/confirmation/:token
 //@desc  Insert user route
@@ -435,43 +430,7 @@ router.get("/homeownernotify/:id",(req,res)=>{
 
 })
 
-    // if(!err){
-    //   let i=0;
-    //   for (i=0;i<rows.length;i++){
-    //     console.log("inside for loop")
-    //     console.log("rows",rows[i])
-      
-    //     let statement2 ="select * from booking where bo_id=?"
-    //     mysqlConnection.query(statement2,rows[i].bo_id,(err,results)=>{
-    //       // console.log("results",results)
-    //       for(let j=0;j<results.length;j++){
-    //         console.log("results",results[j].ow_id)
-    //         console.log("rows",rows[j])
-    //       }
-    //     //   let statement3 ="select * from homeowner where ow_id=?"
-    //     //   mysqlConnection.query(statement3,results[i].ow_id,(err,secondresult)=>{
-    //     //     if(!err){
-    //     //       console.log("secondResult",secondresult[1][i])
-    //     //     }
-    //     //   })
-    //     //   // console.log("result",results[1][i])
-    //     //   // data.push({
-    //     //   //   bookingdetail:rows[i].travel_date
-    //     //   // })
-
-        
-          
-    //     })
-        
-      
-      
-//     }else{
-//       console.log("evbooking error",err)
-//     }
-//   })
-// res.json({hi:"helo"})})
-
-
+    
 router.get("/test",(req,res)=>res.json({hello:"hi"}));
 
 module.exports=router;
