@@ -85,6 +85,56 @@ router.post("/login", (req, res) => {
 });
 
 
+router.post("/homelogin", (req, res) => {
+  console.log("This is inside the post api/user/homelogin");
+  // const { errors, isValid } = validateLogin(req.body);
+  const isValid = true;
+  //Check Validation
+  if (!isValid) {
+    return res.status(400).json({ errors });
+  }
+
+  let statement = "SELECT * FROM homeowner WHERE ow_email=? && ow_userstatus=?";
+
+  let { email, password } = req.body;
+  mysqlConnection.query(statement, [email,"active"], (err, rows) => {
+    if (!err && rows[0]) {
+
+      if (bcrypt.compare(password, rows[0].ev_password)) {
+        //"Authorized"
+        //0 is Active 1 is Inactive
+
+        let statement2 =
+          "UPDATE homeowner SET login_status=? WHERE ow_email=? ;";
+        mysqlConnection.query(statement2, ["online", email], (err, results) => {
+          if (!err) {
+            const payload = {
+              email: rows[0].ow_email
+              // id:row[0].ev_id
+            };
+            jwt.sign(
+              payload,
+              keys.secretOrkey,
+              {
+                expiresIn: tokenExpiration
+              },
+              (err, token) => {
+                res.json({ success: true, token: `Bearer ` + token });
+              }
+            );
+          } else {
+            res.json({ error: "Failed to update user status" });
+          }
+        });
+      } 
+    } else {
+      //Not authorized"
+      res.json({ success:false });
+    }
+  });
+});
+
+
 //@route post api/users/
 //it is called from signupasreciver
 router.post("/signupasreciver", (req, res) => {
@@ -216,6 +266,11 @@ router.get("/dashboard",
       res.json(req.user)
     });
      
+    router.get("/homeownerdashboard",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      res.json(req.user)
+    });
 
    //@route GET api/users/confirmation/:token
 //@desc  Insert user route
