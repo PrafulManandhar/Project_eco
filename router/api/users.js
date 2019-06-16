@@ -272,6 +272,12 @@ router.get("/dashboard",
       res.json(req.user)
     });
 
+    router.get("/homeownerdashboard",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      res.json(req.user)
+    });
+
    //@route GET api/users/confirmation/:token
 //@desc  Insert user route
 //@access
@@ -372,7 +378,6 @@ router.get('/homeowner/:id',(req,res)=>{
 
 router.post('/booking',(req,res)=>{
   // res.json(req)
-  console.log("api/user/booking")
   let {
     owid,
     evid,
@@ -387,7 +392,7 @@ router.post('/booking',(req,res)=>{
       if(!err){
         res.json({success:true})
       }else{
-        console.log("err from api/user/booking",err)
+        console.log(err)
       }
   })
 })
