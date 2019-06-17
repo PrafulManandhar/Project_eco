@@ -74,7 +74,7 @@ class Cards extends React.Component {
         <CardMedia
           className={classes.media}
           // image={`./image/${this.props.item.src}`}
-          imgage={Img}
+          image={require(`../../profilePhoto/${this.props.card.ow_image}`)}
           title={this.props.card.ow_username}
         />
         <CardContent>

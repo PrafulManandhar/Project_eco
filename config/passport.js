@@ -30,7 +30,8 @@ module.exports = passport => {
                 mobile: results[0].ow_mobile,
                 registration_data: results[0].ow_registration_date,
                 status: results[0].ow_status,
-                address: results[0].ow_address
+                address: results[0].ow_address,
+                role:results[0].Role
               };
               return next(null, user);
             }
@@ -53,7 +54,9 @@ module.exports = passport => {
                 mobile: results[0].ev_mobile,
                 registration_data: results[0].ev_registration_date,
                 status: results[0].ev_status,
-                address: results[0].ev_address
+                address: results[0].ev_address,
+                role:results[0].Role
+
               };
               return next(null, user);
             }

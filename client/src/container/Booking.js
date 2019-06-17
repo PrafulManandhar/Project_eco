@@ -4,7 +4,7 @@ import HomeownerImage from "../ImageSliderImages/user.png";
 import { connect } from "react-redux";
 import { Input, DatePicker } from "reactstrap";
 import Axios from "axios";
-import BookingValidation from '../Validator/BookingValidataion';
+import BookingValidation from "../Validator/BookingValidataion";
 import HomeownerTable from "./ecCustomerDashboard/HomeownerTable";
 class Booking extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Booking extends Component {
     };
   }
   componentDidMount = async () => {
-    console.log(this.state.homeownerId)
+    console.log(this.state.homeownerId);
     await Axios.get(
       `http://localhost:5000/api/users/homeowner/${this.state.homeownerId}`
     )
@@ -44,19 +44,19 @@ class Booking extends Component {
       chargingduration: document.querySelector("#chargingduration").value
     };
     console.log("Booking detail", bookingdetail);
-    const {error,isValid} = BookingValidation(bookingdetail)
-    if(isValid){
+    const { error, isValid } = BookingValidation(bookingdetail);
+    if (isValid) {
       Axios.post("http://localhost:5000/api/users/booking", bookingdetail)
-      .then(res => {
-        if (res.data.success) {
-          this.setState({ booking: true });
-        }
-      })
-      .catch(err => console.log(err));
+        .then(res => {
+          if (res.data.success) {
+            this.setState({ booking: true });
+          }
+        })
+        .catch(err => console.log(err));
     }
-    
   };
   render() {
+    let utc = new Date().toJSON().slice(0, 10);
     return (
       <div>
         <body class="profile-page">
@@ -111,10 +111,13 @@ class Booking extends Component {
                     <span class="profile-label">Date To Travel :</span>
                     <span class="profile-value">
                       <input
+                        className="form-control"
                         type="date"
                         placeholder={this.state.date}
                         id="date"
+                        min={utc}
                       />
+                     
                     </span>
                   </li>
                   <li>

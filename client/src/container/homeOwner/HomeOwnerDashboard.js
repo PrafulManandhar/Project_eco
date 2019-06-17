@@ -10,6 +10,7 @@ import {loginbookingdata} from '../../Action/bookingAction'
 
 import setAuthToken from "../../Utility/setauth";
 import { constants } from "zlib";
+import AvailabilityCard from "./AvailabilityCard";
 
 class HomeOwnerDashboard extends Component {
   componentWillMount = async() => {
@@ -49,6 +50,10 @@ class HomeOwnerDashboard extends Component {
         <Col md="12">
         <Navbar/>
         
+        </Col>
+        <Col md="12">
+        
+        <AvailabilityCard/>
         </Col>
       </Row>
     </Container>);

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connnect } from "react-redux";
-import Img from "../../bootstrap/images/prafulimage.jpg";
+// import { connnect } from "react-redux";
+// import Img from "../../bootstrap/images/prafulimage.jpg";
 import { connect } from "react-redux";
 import { logout } from "../../Action/loginAction";
 import { logoutusersdata } from "../../Action/loginUserDataAction";
@@ -9,6 +9,9 @@ import { withRouter } from "react-router-dom";
 import {NavLink} from 'react-router-dom'
 
 class Navbar extends Component {
+  
+
+
   logout = () => {
     localStorage.clear();
     this.props.logout();
@@ -17,7 +20,7 @@ class Navbar extends Component {
     this.props.history.replace("/");
   };
   render() {
-    // console.log(this.props.Userdata.data.user)
+    
     return (
       <div>
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -104,6 +107,7 @@ class Navbar extends Component {
                 aria-labelledby="alertsDropdown"
               >
                 <h6 class="dropdown-header">Alerts Center</h6>
+                
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
                     <div class="icon-circle bg-primary">
@@ -117,36 +121,8 @@ class Navbar extends Component {
                     </span>
                   </div>
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-success">
-                      <i class="fas fa-donate text-white" />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                      <i class="fas fa-exclamation-triangle text-white" />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for
-                    your account.
-                  </div>
-                </a>
-                <a
-                  class="dropdown-item text-center small text-gray-500"
-                  href="#"
-                >
-                  Show All Alerts
-                </a>
-              </div>
+                
+             </div>
             </li>
 
             {/* <!-- Nav Item - Messages --> */}
@@ -265,7 +241,7 @@ class Navbar extends Component {
                   {/* {console.log("username",this.props.UserInfo.userInfo.username)} */}
                   {this.props.UserInfo.userInfo.username}
                 </span>
-                <img class="img-profile rounded-circle" src={Img} />
+                <img class="img-profile rounded-circle"  src={require(`../../profilePhoto/11.jpg`)}/>
               </a>
               {/* <!-- Dropdown - User Information --> */}
               <div

@@ -9387,3 +9387,95 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+  /* css of availability  */
+
+  .available-form{
+    width:100%;
+    height:500px;
+    padding:20px;
+    background: #d96d25;
+    color:#fff;
+}
+.available-form ul{
+    list-style: none;
+    padding:0 0 30px 0;
+    margin: 0 0 30px 0;
+    position: relative;
+}
+.available-form ul:after{
+    content: '';
+    position: absolute;
+    left:0px;
+    bottom: 0px;
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+
+}
+.available-form ul li{
+    padding: 2px 0;
+}
+.available-form ul li input[type="checkbox"]{
+    margin-right:5px;
+
+}
+.available-form input[type="time"]{
+    border: 0px;
+    width: 70%;
+    margin: 0 0 0;
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+.time-container{
+display: inline-block;
+width: 100%;
+}
+.time-holder{
+    float:left;
+    width: 50%;
+}
+.available-form h4{
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.available-image-area{
+    width:100%;
+    height:500px;
+    padding:20px;
+    background-image:url('../../ImageSliderImages/tesla.jpg'); 
+    background-size:cover;
+    background-repeat:no-repeat;
+    position: relative;
+}
+.available-image-area:after{
+    content: '';
+    position: absolute;
+    left: 0px;
+    top:0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(183, 104, 51, 0.4);
+}
+.available-form input[type="submit"]{
+    border:0px;
+    background: #824b26;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin: 30px 0 0 0;
+    padding: 0px 30px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+
+}
+.p-rt-0{
+    padding-right: 0px;
+}
+.p-lt-0{
+    padding-left: 0px;
+}
+

@@ -43,7 +43,7 @@ export default class Navbar extends Component {
                   </NavLink>
                 </li>
                 <li class="nav-item cta">
-                  <NavLink to="/login" class="nav-link ml-lg-2">
+                  <NavLink to="/loginmain" class="nav-link ml-lg-2">
                     <span class="icon-user" /> Sign-In
                   </NavLink>
                 </li>
