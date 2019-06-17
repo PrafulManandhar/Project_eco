@@ -25,6 +25,9 @@ class Navbar extends Component {
       <div>
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
           {/* <!-- Sidebar Toggle (Topbar) --> */}
+          <NavLink class="navbar-brand" to="/homedashboard">
+              ECO<span> CHARGE</span><span>HUB</span>
+            </NavLink>
           <button
             id="sidebarToggleTop"
             class="btn btn-link d-md-none rounded-circle mr-3"

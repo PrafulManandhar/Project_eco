@@ -21,6 +21,9 @@ class Navbar extends Component {
     return (
       <div>
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <NavLink class="navbar-brand" to="/evdashboardmain">
+              ECO<span> CHARGE</span><span>HUB</span>
+            </NavLink>
           {/* <!-- Sidebar Toggle (Topbar) --> */}
           <button
             id="sidebarToggleTop"

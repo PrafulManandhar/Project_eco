@@ -27,11 +27,12 @@ class BookingCards extends Component {
   }
   render() {
   
-    return (<Container maxWidth="sm">
+    return (<Container fluid>
       <Row>
-      <Col md="12">
-          <Navbar/>
-          </Col>
+        <Col md="12">
+          <Navbar />
+        </Col>
+         
         
       <div
         style={{
