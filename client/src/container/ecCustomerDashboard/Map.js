@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import { connect } from "react-redux";
-import * as location from '../../locationJson/location.json'
-import axios from "axios";
+// import * as location from '../../locationJson/location.json'
+// import axios from "axios";
 
 function Map() {
   const [viewport, setViewport] = useState({

@@ -299,12 +299,39 @@ router.get("/confirmation/:token", (req, res) => {
 //@route to api/users/denybooking
 // It deny the booking of the evcustomer
 
-route.put(`/denybooking`,(req,res)=>{
-  let {email} = req.body;
+router.put(`/denybooking`,(req,res)=>{
+  let {email,bo_id} = req.body;
   
-  let statement="update booking set booking_status=? "
+  let statement="update booking set booking_status=? where bo_id=? ";
+  mysqlConnection.query(statement,["rejected",bo_id],(err,results)=>{
+    if(!err){
+      if(results.affectedRows !==0){
+        res.json({type:"success" , message:"Booking Rejected Successfully"})
+      }else{
+        res.json({type:"error", message:"Error while Rejecting the Booking"})
+      }
+    }else{
+      res.json({errors:errors})
+    }
+  })
 })
 
+router.put("/acceptbooking",(req,res)=>{
+  let {bo_id} = req.body;
+  console.log("bo_id",bo_id)
+  let statement="update booking set booking_status=? where bo_id=? ";
+  mysqlConnection.query(statement,["accepted",bo_id],(err,results)=>{
+    if(!err){
+      if(results.affectedRows !==0){
+        res.json({type:"success" , message:"Booking Accepted Successfully"})
+      }else{
+        res.json({type:"error", message:"Error while Accepting the Booking"})
+      }
+    }else{
+      res.json({errors:errors})
+    }
+  })
+})
 
 
 
