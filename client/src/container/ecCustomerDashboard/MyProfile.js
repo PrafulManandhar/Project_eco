@@ -11,7 +11,9 @@ class MyProfile extends Component {
   state = {
     device_photos: "",
     email: this.props.MyProfile.userInfo.email,
-    role:this.props.MyProfile.userInfo.role
+    role:this.props.MyProfile.userInfo.role,
+    show:false,
+    message:''
   };
 
   handlePhotos = event => {
@@ -57,7 +59,6 @@ class MyProfile extends Component {
   }
 
   render() {
-    console.log(this.props.MyProfile.userInfo);
     return (
       <div>
         <Navbar />
@@ -70,15 +71,15 @@ class MyProfile extends Component {
                     <div class="col-sm-3 col-3">
                       <div class=" ower-profile--left">
                         <div class="profile-img-holder">
-                          <img src={require(`../../profilePhoto/${this.props.MyProfile.userInfo.image}`)} alt="" />
+                          {/* <img src={require(`../../profilePhoto/1.jpeg`)} alt="" /> */}
                         </div>
                         <div class="ower-profile--info">
-                          <h3>{this.props.MyProfile.userInfo.username}</h3>
+                          {/* <h3>{this.props.MyProfile.userInfo.username}</h3> */}
                           <a href="#" class="email">
-                            {this.props.MyProfile.userInfo.email}
+                            {/* {this.props.MyProfile.userInfo.email} */}
                           </a>
                           <span class="phone">
-                            {this.props.MyProfile.userInfo.mobile}
+                            {/* {this.props.MyProfile.userInfo.mobile} */}
                           </span>
                         </div>
                       </div>
@@ -105,7 +106,7 @@ class MyProfile extends Component {
                               <li>
                                 <span class="bi-label">Address:</span>
                                 <span class="bi-value">
-                                  {this.props.MyProfile.userInfo.address}
+                                  {/* {this.props.MyProfile.userInfo.address} */}
                                 </span>
                               </li>
                               <li>
@@ -119,15 +120,15 @@ class MyProfile extends Component {
                               <li>
                                 <span class="bi-label">Mobile no:</span>
                                 <span class="bi-value">
-                                  {this.props.MyProfile.userInfo.mobile}
+                                  {/* {this.props.MyProfile.userInfo.mobile} */}
                                 </span>
                               </li>
                               <li>
                                 <span class="bi-label">Register date:</span>
                                 <span class="bi-value">
                                   {
-                                    this.props.MyProfile.userInfo
-                                      .registration_data
+                                    // this.props.MyProfile.userInfo
+                                      // .registration_data
                                   }
                                 </span>
                               </li>

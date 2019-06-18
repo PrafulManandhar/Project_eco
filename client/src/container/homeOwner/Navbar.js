@@ -20,32 +20,11 @@ class Navbar extends Component {
     localStorage.clear();
     this.props.logout();
     this.props.logoutusersdata();
+    this.props.logoutbookingdata();
     this.props.history.replace("/");
   };
   render() {
-    // let notification = <p>No any Notification</p>;
-    // if (this.props.bookingdata) {
-    //   let a = Object.keys(this.props.bookingdata.bookingInfo).length;
-    //   for (let i = 0; i < a; i++) {
-    //     notification.push(
-    //       <a class="dropdown-item d-flex align-items-center" href="#">
-    //         <div class="mr-3">
-    //           <div class="icon-circle bg-primary">
-    //             <i class="fas fa-file-alt text-white" />
-    //           </div>
-    //         </div>
-    //         <div>
-    //           <div class="small text-gray-500">
-    //             {this.props.bookingdata.bookingInfo[i].travel_date}
-    //           </div>
-    //           <span class="font-weight-bold">
-    //             {this.props.bookingdata.bookingInfo[i].ev_username}{" "}
-    //           </span>
-    //         </div>
-    //       </a>
-    //     );
-    //   }
-    // }
+   
     return (
       <div>
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">

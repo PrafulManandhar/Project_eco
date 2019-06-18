@@ -23,7 +23,7 @@ class HomeOwnerDashboard extends Component {
       })
       .catch(err => console.error(err));
 
-      axios.get(`http://localhost:5000/api/users/homeownernotify/${this.props.UserInfo.userInfo.id}`).then(res=>{this.props.loginbookingdata(res.data)
+     await axios.get(`http://localhost:5000/api/users/homeownernotify/${this.props.UserInfo.userInfo.id}`).then(res=>{this.props.loginbookingdata(res.data)
     console.log(this.props.bookingdata)}).catch(err=>console.error(err))
 
     console.log("this.props.bookingdata",this.props.bookingdata)
@@ -34,7 +34,7 @@ class HomeOwnerDashboard extends Component {
       this.props.loginusersdata(decode);
       this.props.login();
 
-      axios
+     await axios
         .get("http://localhost:5000/api/users/homeownerdashboard")
         .then(res => {
           console.log("Login user information", res.data);
