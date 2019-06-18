@@ -22,8 +22,13 @@ const dataTableData = {
       sort: "asc"
     },
     {
-      label: "Service Availability",
-      field: "availability",
+      label: "Service Availability From ",
+      field: "availabilityfrom",
+      sort: "asc"
+    },
+    {
+      label: "Service Availability To ",
+      field: "availabilityto",
       sort: "asc"
     },
     {
@@ -63,7 +68,9 @@ export default class HomeownerTable extends Component {
         sno: home.ow_id,
         name: home.ow_username,
         location: home.ow_address,
-        availability: home.ow_availability,
+        availabilityFrom: home.ow_availabilityFrom,
+        availabilityTo: home.ow_availabilityTo,
+
         userStatus: home.login_status,
         action: (
           <button

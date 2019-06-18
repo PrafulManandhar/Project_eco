@@ -142,7 +142,7 @@ input:focus {
   outline: none;
 }
 
-button {
+/* button {
   background: teal;
   border: none;
   border-radius: 50px;
@@ -151,12 +151,13 @@ button {
   padding: 10px 0;
   width: 70%;
 
-  border-radius:10px;
+  border-radius:10px; */
  
   /* --webkit-box-shadow: -7px 10px 71px -28px rgba(73,199,113,1);
   -moz-box-shadow: -7px 10px 71px -28px rgba(73,199,113,1);
   box-shadow: -7px 10px 71px -28px rgba(73,199,113,1); */
-}
+/* } */
+
 .dont {
   margin: 10px 0;
 }

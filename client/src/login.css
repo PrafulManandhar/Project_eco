@@ -144,7 +144,7 @@ input:focus{
   outline:none;
 }
 
-button{
+/* button{
   background: teal;
   border: none;
   border-radius: 50px;
@@ -156,7 +156,7 @@ button{
   -moz-box-shadow: -7px 10px 71px -28px rgba(73,199,113,1);
   box-shadow: -7px 10px 71px -28px rgba(73,199,113,1);
 
-}
+} */
 .dont{
   margin: 10px 0;
 }

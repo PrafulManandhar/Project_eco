@@ -296,6 +296,45 @@ router.get("/confirmation/:token", (req, res) => {
   }
 });
 
+//@route to api/users/denybooking
+// It deny the booking of the evcustomer
+
+route.put(`/denybooking`,(req,res)=>{
+  let {email} = req.body;
+  
+  let statement="update booking set booking_status=? "
+})
+
+
+
+
+//@route to api/users/updateavailability
+// help to Update the availability of the homeowner
+router.put(`/updateavailability`,(req,res)=>{
+  
+  let {email,timeTo,timeFrom}=req.body;
+
+  let statement="Update homeowner set ow_availabilityTo = ? , ow_availabilityFrom=? where ow_email=?";
+console.log(email)  
+  mysqlConnection.query(statement,[timeTo,timeFrom,email],(err,results)=>{
+    if (!err) {
+      if (results.affectedRows !== 0)
+        res.json({
+          type: "success",
+          message: "Successfully Updated Availability"
+        });
+      else
+        res.json({ type: "error", message: "Fail to Update Availability" });
+    } else {
+      res.json(err);
+    }
+  })
+
+})
+
+
+
+
 router.get("/evconfirmation/:token", (req, res) => {
   if (!req.params.token) return;
   try {
