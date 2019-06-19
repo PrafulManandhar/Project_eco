@@ -3,25 +3,77 @@ import Navbar from "./Navbar";
 import Img from "../../ImageSliderImages/user.png";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { FormGroup, FormControl, Form,Col, Alert } from "react-bootstrap";
+import { FormGroup, FormControl, Form, Col, Alert } from "react-bootstrap";
 import { Button } from "@material-ui/core";
 import Axios from "axios";
+import { loginusersdata,logoutusersdata} from "../../Action/loginUserDataAction";
+import { login } from "../../Action/loginAction";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+
+import setAuthToken from "../../Utility/setauth";
+
+
 
 class MyProfile extends Component {
   state = {
     device_photos: "",
     email: this.props.MyProfile.userInfo.email,
-    role:this.props.MyProfile.userInfo.role,
-    show:false,
-    message:''
+    role: this.props.MyProfile.userInfo.role,
+    username: "",
+    mobile: "",
+    address: "",
+    image: this.props.MyProfile.userInfo.image,
+    message: "",
+    show: false,
+    registration_data: ""
   };
+
+  componentDidMount = async () => {
+    await this.setState({
+      role: this.props.MyProfile.userInfo.role,
+      username: this.props.MyProfile.userInfo.username,
+      email: this.props.MyProfile.userInfo.email,
+      mobile: this.props.MyProfile.userInfo.mobile,
+      address: this.props.MyProfile.userInfo.address,
+      image: this.props.MyProfile.userInfo.image,
+      registration_data: this.props.MyProfile.userInfo.registration_data
+    });
+    
+    if(localStorage.token){
+      setAuthToken(localStorage.token);
+      const decode = jwt_decode(localStorage.token);
+      this.props.loginusersdata(decode);
+      this.props.login();
+
+     await axios
+        .get("http://localhost:5000/api/users/homeownerdashboard")
+        .then(res => {
+          console.log("Login user information", res.data);
+          this.props.loginusersdata(res.data);
+          console.log("Login User info", this.props.MyProfile);
+          this.setState({
+            role: this.props.MyProfile.userInfo.role,
+            username: this.props.MyProfile.userInfo.username,
+            email: this.props.MyProfile.userInfo.email,
+            mobile: this.props.MyProfile.userInfo.mobile,
+            address: this.props.MyProfile.userInfo.address,
+            image: this.props.MyProfile.userInfo.image,
+            registration_data: this.props.MyProfile.userInfo.registration_data
+          });
+        });
+    }
+  };
+
 
   handlePhotos = event => {
     event.preventDefault();
     let files = event.target.files;
 
     if (files && files.length > 0) {
-      this.setState({ device_photos: files[0].name },()=>console.log(this.state.device_photos));
+      this.setState({ device_photos: files[0].name }, () =>
+        console.log(this.state.device_photos)
+      );
     } else console.log("no files selected");
   };
 
@@ -51,12 +103,13 @@ class MyProfile extends Component {
     });
   };
 
-
-  showAlerts =()=>{
-    this.setState({show:true},()=>{
-      setTimeout(()=>{this.setState({show:false})},3000)
-    })
-  }
+  showAlerts = () => {
+    this.setState({ show: true }, () => {
+      setTimeout(() => {
+        this.setState({ show: false });
+      }, 3000);
+    });
+  };
 
   render() {
     return (
@@ -91,12 +144,8 @@ class MyProfile extends Component {
                             <h4>About Me</h4>
                             <ul>
                               <li>
-                                <p>
-                              I am Teacher
-                                </p>
-                                <p>
-                                 I promote EV cars and bike
-                                </p>
+                                <p>I am Teacher</p>
+                                <p>I promote EV cars and bike</p>
                               </li>
                             </ul>
                           </div>
@@ -128,7 +177,7 @@ class MyProfile extends Component {
                                 <span class="bi-value">
                                   {
                                     // this.props.MyProfile.userInfo
-                                      // .registration_data
+                                    // .registration_data
                                   }
                                 </span>
                               </li>
@@ -150,10 +199,10 @@ class MyProfile extends Component {
                           </span>
                         </div>
                         <Col>
-                        <Alert show={this.state.show}>
-                          {this.state.message}
-                        </Alert>
-                      </Col>
+                          <Alert show={this.state.show}>
+                            {this.state.message}
+                          </Alert>
+                        </Col>
                       </div>
                     </div>
                   </div>
@@ -170,5 +219,9 @@ class MyProfile extends Component {
 const mapStateToProps = state => ({
   MyProfile: state.userdata
 });
+const mapActionToProps = dispatch => ({
+  loginusersdata: payload => dispatch(loginusersdata(payload)),
+  login:()=>dispatch(login()),
+});
 
-export default connect(mapStateToProps)(MyProfile);
+export default connect(mapStateToProps,mapActionToProps)(MyProfile);
