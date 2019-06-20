@@ -31,6 +31,8 @@ module.exports = passport => {
                 registration_data: results[0].ow_registration_date,
                 status: results[0].ow_status,
                 address: results[0].ow_address,
+                zone:results[0].ow_zone,
+                district:results[0].ow_district,
                 role:results[0].Role
               };
               return next(null, user);
@@ -55,7 +57,9 @@ module.exports = passport => {
                 registration_data: results[0].ev_registration_date,
                 status: results[0].ev_status,
                 address: results[0].ev_address,
-                role:results[0].Role
+                role:results[0].Role,
+                zone:results[0].zone,
+                district:results[0].district,
 
               };
               return next(null, user);

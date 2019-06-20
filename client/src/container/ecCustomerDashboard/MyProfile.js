@@ -3,27 +3,28 @@ import Navbar from "./Navbar";
 import Img from "../../ImageSliderImages/user.png";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { FormGroup, FormControl, Form, Col, Alert } from "react-bootstrap";
-import { Button } from "@material-ui/core";
-import Axios from "axios";
-import { loginusersdata,logoutusersdata} from "../../Action/loginUserDataAction";
+import { FormGroup, FormControl, Form, Col, Alert,Button } from "react-bootstrap";
+
+
+import {
+  loginusersdata,
+  logoutusersdata
+} from "../../Action/loginUserDataAction";
 import { login } from "../../Action/loginAction";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import setAuthToken from "../../Utility/setauth";
 
-
-
 class MyProfile extends Component {
   state = {
     device_photos: "",
-    email: this.props.MyProfile.userInfo.email,
-    role: this.props.MyProfile.userInfo.role,
+    email: "",
+    role: "",
     username: "",
     mobile: "",
     address: "",
-    image: this.props.MyProfile.userInfo.image,
+    image: "",
     message: "",
     show: false,
     registration_data: ""
@@ -31,40 +32,46 @@ class MyProfile extends Component {
 
   componentDidMount = async () => {
     await this.setState({
-      role: this.props.MyProfile.userInfo.role,
-      username: this.props.MyProfile.userInfo.username,
-      email: this.props.MyProfile.userInfo.email,
-      mobile: this.props.MyProfile.userInfo.mobile,
-      address: this.props.MyProfile.userInfo.address,
-      image: this.props.MyProfile.userInfo.image,
-      registration_data: this.props.MyProfile.userInfo.registration_data
+      role: this.props.MyInfo.userInfo.role,
+      username: this.props.MyInfo.userInfo.username,
+      email: this.props.MyInfo.userInfo.email,
+      mobile: this.props.MyInfo.userInfo.mobile,
+      address: this.props.MyInfo.userInfo.address,
+      image: this.props.MyInfo.userInfo.image,
+      registration_data: this.props.MyInfo.userInfo.registration_data,
+      zone:this.props.MyInfo.userInfo.zone,
+      district:this.props.MyInfo.userInfo.district
     });
-    
-    if(localStorage.token){
-      setAuthToken(localStorage.token);
-      const decode = jwt_decode(localStorage.token);
-      this.props.loginusersdata(decode);
-      this.props.login();
+    console.log(this.state);
+    if (!this.state.address) {
+      if (localStorage.token) {
+        setAuthToken(localStorage.token);
+        const decode = jwt_decode(localStorage.token);
+        this.props.loginusersdata(decode);
 
-     await axios
-        .get("http://localhost:5000/api/users/homeownerdashboard")
-        .then(res => {
-          console.log("Login user information", res.data);
-          this.props.loginusersdata(res.data);
-          console.log("Login User info", this.props.MyProfile);
-          this.setState({
-            role: this.props.MyProfile.userInfo.role,
-            username: this.props.MyProfile.userInfo.username,
-            email: this.props.MyProfile.userInfo.email,
-            mobile: this.props.MyProfile.userInfo.mobile,
-            address: this.props.MyProfile.userInfo.address,
-            image: this.props.MyProfile.userInfo.image,
-            registration_data: this.props.MyProfile.userInfo.registration_data
+        this.props.login();
+
+        await axios
+          .get("http://localhost:5000/api/users/homeownerdashboard")
+          .then(res => {
+            console.log("Login user information", res.data);
+            this.props.loginusersdata(res.data);
+            console.log("Login User info", this.props.MyInfo);
           });
+        this.setState({
+          role: this.props.MyInfo.userInfo.role,
+          username: this.props.MyInfo.userInfo.username,
+          email: this.props.MyInfo.userInfo.email,
+          mobile: this.props.MyInfo.userInfo.mobile,
+          address: this.props.MyInfo.userInfo.address,
+          image: this.props.MyInfo.userInfo.image,
+          registration_data: this.props.MyInfo.userInfo.registration_data,
+          zone: this.props.MyInfo.userInfo.zone,
+          district: this.props.MyInfo.userInfo.district
         });
+      }
     }
   };
-
 
   handlePhotos = event => {
     event.preventDefault();
@@ -77,8 +84,9 @@ class MyProfile extends Component {
     } else console.log("no files selected");
   };
 
-  upload = () => {
-    Axios.put("http://localhost:5000/api/users/uploadphoto", this.state)
+  upload = async() => {
+   await axios
+      .put("http://localhost:5000/api/users/uploadphoto", this.state)
       .then(res => {
         console.log("Resp is ", res.data);
         if (res.data.errors) {
@@ -95,19 +103,11 @@ class MyProfile extends Component {
       .catch(err => console.log("ERROR", err));
   };
 
-  showAlert = () => {
-    this.setState({ show: true }, () => {
-      setTimeout(() => {
-        this.setState({ show: false });
-      }, 2000);
-    });
-  };
-
   showAlerts = () => {
     this.setState({ show: true }, () => {
       setTimeout(() => {
         this.setState({ show: false });
-      }, 3000);
+      }, 1000);
     });
   };
 
@@ -124,16 +124,22 @@ class MyProfile extends Component {
                     <div class="col-sm-3 col-3">
                       <div class=" ower-profile--left">
                         <div class="profile-img-holder">
-                          {/* <img src={require(`../../profilePhoto/1.jpeg`)} alt="" /> */}
+                        {(this.props.MyInfo.userInfo.image)? <img
+                            src={require(`../../profilePhoto/${
+                              this.props.MyInfo.userInfo.image
+                            }`)}
+                            alt=""
+                          />: <img
+                          src={require(`../../profilePhoto/noimage.jpg`)}
+                          alt="no Uploaded Photo"
+                        />}
                         </div>
                         <div class="ower-profile--info">
-                          {/* <h3>{this.props.MyProfile.userInfo.username}</h3> */}
+                          <h3>{this.state.username}</h3>
                           <a href="#" class="email">
-                            {/* {this.props.MyProfile.userInfo.email} */}
+                            {this.state.email}
                           </a>
-                          <span class="phone">
-                            {/* {this.props.MyProfile.userInfo.mobile} */}
-                          </span>
+                          <span class="phone">{this.state.mobile}</span>
                         </div>
                       </div>
                     </div>
@@ -150,35 +156,32 @@ class MyProfile extends Component {
                             </ul>
                           </div>
                           <div class="basicInfo-item">
-                            <h4>Basic Information</h4>
+                          <h4>Basic Information</h4>
                             <ul>
                               <li>
                                 <span class="bi-label">Address:</span>
                                 <span class="bi-value">
-                                  {/* {this.props.MyProfile.userInfo.address} */}
+                                  {this.state.address}
                                 </span>
                               </li>
                               <li>
                                 <span class="bi-label">Zone:</span>
-                                <span class="bi-value">Kathmandu</span>
+                                <span class="bi-value">{this.state.zone}</span>
                               </li>
                               <li>
                                 <span class="bi-label">District:</span>
-                                <span class="bi-value">kathmandu</span>
+                                <span class="bi-value">{this.state.district}</span>
                               </li>
                               <li>
                                 <span class="bi-label">Mobile no:</span>
                                 <span class="bi-value">
-                                  {/* {this.props.MyProfile.userInfo.mobile} */}
+                                  {this.state.mobile}
                                 </span>
                               </li>
                               <li>
                                 <span class="bi-label">Register date:</span>
                                 <span class="bi-value">
-                                  {
-                                    // this.props.MyProfile.userInfo
-                                    // .registration_data
-                                  }
+                                  {this.state.registration_data}
                                 </span>
                               </li>
                             </ul>
@@ -188,21 +191,20 @@ class MyProfile extends Component {
                           </NavLink>
                           <span style={{ marginLeft: "50px" }}>
                             <FormGroup>
-                              <Form.Label>Upload Profile Photo</Form.Label>{" "}
+                              <Form.Label>
+                                Upload Profile Photo
+                              </Form.Label>
                               <FormControl
                                 name="images[]"
                                 type="file"
                                 onChange={this.handlePhotos}
                               />
-                              <Button onClick={this.upload}>Upload</Button>
                             </FormGroup>
+                            
                           </span>
+                          <Button onClick={this.upload}>Upload</Button>
+                          <Alert show={this.state.show} >{this.state.message}</Alert>
                         </div>
-                        <Col>
-                          <Alert show={this.state.show}>
-                            {this.state.message}
-                          </Alert>
-                        </Col>
                       </div>
                     </div>
                   </div>
@@ -217,11 +219,14 @@ class MyProfile extends Component {
 }
 
 const mapStateToProps = state => ({
-  MyProfile: state.userdata
+  MyInfo: state.userdata
 });
 const mapActionToProps = dispatch => ({
   loginusersdata: payload => dispatch(loginusersdata(payload)),
-  login:()=>dispatch(login()),
+  login: () => dispatch(login())
 });
 
-export default connect(mapStateToProps,mapActionToProps)(MyProfile);
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(MyProfile);

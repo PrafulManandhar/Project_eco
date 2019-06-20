@@ -109,10 +109,10 @@ class Cards extends React.Component {
             Date of Booking : {this.props.card.travel_date}
             </Typography>
             <Typography paragraph>
-            Mobile :{this.props.card.ev_mobile}
+            Mobile :{this.props.card.ow_mobile}
             </Typography>
             <Typography>
-             Email: {this.props.card.ev_email}
+             Email: {this.props.card.ow_email}
             </Typography>
           </CardContent>
         </Collapse>

@@ -424,15 +424,11 @@ router.get("/homeowner", (req, res) => {
 
 router.get("/homeowner/:id", (req, res) => {
   let statement =
-    "Select ow_id, ow_username,ow_address,ow_availability from homeowner where ow_id=?";
+    "Select ow_id, ow_username,ow_address,ow_availabilityFrom ,ow_availabilityTo ,ow_image from homeowner where ow_id=?";
+    console.log("homeowner/id",req.params.id)
   mysqlConnection.query(statement, req.params.id, (err, results) => {
     if (!err) {
-      // const data={
-      //   ow_id:rows[0].ow_id,
-      //   ow_username:rows[0].ow_username,
-      //   ow_address:rows[0].ow_address,
-      //   ow_availability:rows[0].ow_availability
-      // }
+    
       res.json(results);
     }
   });

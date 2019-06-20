@@ -35,6 +35,8 @@ state={
       mobile: e.target.mobile.value,
       address :e.target.address.value,
       longitude:this.state.longitude,
+      zone:e.target.zone.value,
+      district:e.target.district.value,
       latitude:this.state.latitude
 };
 console.log("data.latitude",data.latitude)
@@ -88,7 +90,12 @@ if (isValid) {
                  {!this.state.error?'':"you have already sign up"}
                 <input type="number" class="form-control" name="mobile" placeholder="Mobile"/>
                 <input type="type" class="form-control" name="address" placeholder="Address"/>
-                <input type="password" class="form-control" name="password" placeholder="Password"/>              <div class="term">
+                <input type="password" class="form-control" name="password" placeholder="Password"/>
+                <input type="type" class="form-control" name="zone" placeholder="Zone"/>
+
+                <input type="type" class="form-control" name="district" placeholder="District"/>
+              <div class="term">
+                  
                 By proceeding, I agree to Uber's Terms of Use and acknowledge
                 that I have read the Privacy Policy.
               </div>

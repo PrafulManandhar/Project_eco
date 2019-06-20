@@ -18,7 +18,10 @@ export default class Signupasreciver extends Component {
       // confirmpassword: e.target.confirmpassword.value,
       email: e.target.email.value,
       mobile: e.target.mobile.value,
-      address: e.target.address.value
+      address: e.target.address.value,
+      district:e.target.address.value,
+      zone:e.target.zone.value,
+
     };
     const { errors, isValid } = FormValidationRegister(data);
     if (isValid) {
@@ -68,6 +71,9 @@ export default class Signupasreciver extends Component {
                 <input type="email" class="form-control" name="email" placeholder="name@example.com"/>
                  {!this.state.error?'':"you have already sign up"}
                 <input type="number" class="form-control" name="mobile" placeholder="Mobile"/>
+                <input type="number" class="form-control" name="zone" placeholder="Zone"/>
+                <input type="number" class="form-control" name="district" placeholder="District"/>
+
                 <input type="text" class="form-control" name="address" placeholder="Address"/>
                 <input type="password" class="form-control" name="password" placeholder="Password"/>
                 

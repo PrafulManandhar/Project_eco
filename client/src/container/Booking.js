@@ -12,8 +12,10 @@ class Booking extends Component {
     this.state = {
       ow_username: "",
       ow_address: "",
-      ow_availability: "",
+      ow_availabilityFrom: "",
+      ow_availabilityTo:'',
       booking: false,
+      ow_image:'',
       time: "",
       homeownerId: props.id,
       date: new Date().toISOString()
@@ -29,8 +31,10 @@ class Booking extends Component {
         this.setState({
           ow_username: res.data[0].ow_username,
           ow_address: res.data[0].ow_address,
-          ow_availability: res.data[0].ow_availability
-        });
+          ow_availabilityFrom: res.data[0].ow_availabilityFrom,
+          ow_availabilityTo:res.data[0].ow_availabilityTo,
+          ow_image:res.data[0].ow_image
+        },()=>console.log(this.state));
       })
       .catch(err => console.log(err));
   };
@@ -66,7 +70,9 @@ class Booking extends Component {
             </div>
             <div class="profile-holder">
               <div class="img-holder">
-                <img src={HomeownerImage} alt="dsfasdf" />
+                {console.log(this.state.ow_image)}
+                {(!this.state.ow_image)?<img src={require(`../profilePhoto/noimage.jpg`)}/>:<img src={require(`../profilePhoto/${this.state.ow_image}`)}/>}
+                {/* <img src={HomeownerImage} alt="dsfasdf" /> */}
               </div>
               <div class="profile-cnt">
                 <ul>
@@ -79,9 +85,15 @@ class Booking extends Component {
                     <span class="profile-value">{this.state.ow_address}</span>
                   </li>
                   <li>
-                    <span class="profile-label">Availability. :</span>
+                    <span class="profile-label">Available From. :</span>
                     <span class="profile-value">
-                      {this.state.ow_availability}
+                      {this.state.ow_availabilityFrom}
+                    </span>
+                  </li>
+                  <li>
+                    <span class="profile-label">Available To. :</span>
+                    <span class="profile-value">
+                      {this.state.ow_availabilityTo}
                     </span>
                   </li>
                   <li>
